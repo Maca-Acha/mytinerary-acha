@@ -49,7 +49,7 @@
   height: 50vh;
 }
 
-h1, h2, h5{
+h1, h2, h3, h5{
   color: #fff;
 }
 
@@ -64,6 +64,16 @@ h1{
 h5 {
   margin-top: 5vh !important;
 }
+
+/*SUBTITULO*/
+.subtitulo{
+  width: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2vh;
+}
+
 /*BOTON*/
 a{
   text-decoration: none !important;
@@ -80,14 +90,6 @@ a{
 }
 .btn-home:hover{
   box-shadow: 0px 4px 4px rgba(252, 116, 116, 0.733) !important;
-}
-/*SUBTITULO*/
-.subtitulo{
-  width: 80vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 2vh;
 }
 /*CAROUSEL*/
 .popular{
@@ -111,6 +113,19 @@ img{
 
 }
 
+/* .conten-carru{
+  width: 50rem !important;
+  margin: 0 !important;
+} */
+
+/* .slick-slide{
+  width: fit-content !important;
+} */
+
+.tarjeta{
+  width: 25vw ;
+}
+/*BOTONES CARRUSEL*/
 .slick-prev{
   left: -53px !important;
 }
@@ -123,4 +138,9 @@ img{
 .slick-next::before {
   font-size: 3rem !important;
   color: #FA736D !important;
+}
+
+/*FOOTER*/
+.footer{
+  background-image:url(../src/assets/foto-footer.png) ;
 }

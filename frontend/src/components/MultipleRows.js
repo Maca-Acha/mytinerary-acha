@@ -7,14 +7,14 @@ export default class MultipleRows extends Component {
     render() {
         const settings = {
             className: "center",
-            centerMode: true,
+            centerMode: false,
             infinite: true,
             centerPadding: "60px",
-            slidesToShow: 2,
+            slidesToShow: 1,
             speed: 200,
             rows: 2,
-            slidesPerRow: 1,
-            autoplay: true,
+            slidesPerRow: 2,
+            autoplay: false,
             autoplaySpeed: 1000
         };
         return (
@@ -23,7 +23,7 @@ export default class MultipleRows extends Component {
                     {Imagenes.map((img, index) => {
                         return (
                             <div key={index}>
-                                <Card className="m-2">
+                                <Card className="mt-2 tarjeta">
                                     <Card.Img
                                         variant="top"
                                         src={`${img.src}`}
