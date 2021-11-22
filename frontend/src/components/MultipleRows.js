@@ -11,16 +11,16 @@ export default class MultipleRows extends Component {
             centerMode: false,
             infinite: true,
             slidesToShow: 1,
-            speed: 500,
+            speed: 900,
             rows: 2,
             slidesPerRow: 2,
             autoplay: true,
-            autoplaySpeed: 1500,
+            autoplaySpeed: 2000,
             responsive: [{
                 breakpoint: 835,
                 settings: {
                     slidesToShow: 1,
-                    speed: 500,
+                    speed: 900,
                     rows: 2,
                     slidesPerRow: 1,
                 }
@@ -28,7 +28,7 @@ export default class MultipleRows extends Component {
                 breakpoint: 600,
                 settings: {
                     slidesToShow: 1,
-                    speed: 500,
+                    speed: 900,
                     rows: 1,
                     slidesPerRow: 1,
                 }

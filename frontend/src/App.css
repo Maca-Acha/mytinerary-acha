@@ -209,8 +209,13 @@ a:hover{
 }
 
 .tarjeta:hover{
-  background-color: #fa746dad !important;
+  background-color: #fa746d86 !important;
 }
+
+.tarjeta:hover .card-title{
+  color:#2D3962;
+}
+
 
 
 /*BOTONES CARRUSEL*/
