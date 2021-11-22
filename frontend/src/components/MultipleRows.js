@@ -14,7 +14,7 @@ export default class MultipleRows extends Component {
             speed: 500,
             rows: 2,
             slidesPerRow: 2,
-            autoplay: false,
+            autoplay: true,
             autoplaySpeed: 1500,
             responsive: [{
                 breakpoint: 835,
