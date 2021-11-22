@@ -27,7 +27,9 @@
 .encabezado{
   background-image: url(../src/assets/foto2.png);
   background-position-y: bottom;
-  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100% !important;
   height: 100vh;
 }
 
@@ -120,6 +122,7 @@ h5 {
   flex-direction: column;
   align-items: center;
   margin-top: 2vh;
+  text-align:center;
 }
 
 /*BOTON*/
@@ -166,8 +169,6 @@ a:hover{
   align-self: center;
 }
 
-
-
 /*CAROUSEL*/
 .popular{
   background-color: #2D3962;
@@ -183,11 +184,11 @@ a:hover{
 
 .carrusel-padre{
   height: 100vh;
-  
 }
 
 .card-img-top{
   height: 30vh;
+  object-fit: cover;
 }
 
 .tarjeta{
@@ -228,7 +229,6 @@ a:hover{
   color: #FA736D !important;
   text-shadow: 0px 2px 4px rgba(92, 92, 92, 0.733) !important;
 }
-
 
 /*FOOTER*/
 .footer{
@@ -312,7 +312,6 @@ p {
 @media (max-width: 760px) {
   .logofooter{
     height: 15vw;
-    /* width: 60vw !important; */
   }
   .contacto-footer{
     height: auto;
@@ -352,7 +351,6 @@ p {
 }
 @media (max-width: 425px) {
   .tarjetas{
-    width: 70vw !important;
-    height: auto !important;
+    width: 72vw !important;
   }
 }
