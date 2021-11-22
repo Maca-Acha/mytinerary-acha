@@ -5,16 +5,17 @@ import Main from "../components/Main"
 import Carousels from '../components/Carousels'
 import Footer from '../components/Footer'
 
-
-
 export default class Home extends React.Component {
     render() {
         return (
             <div>
-                <Navigation />
-                <Main />
+                <div className="encabezado">
+                    <Navigation />
+                    <Main />
+                </div>
                 <Carousels />
                 <Footer />
+                <p className="copyright">©MyTinerary | Proyect2021</p>
             </div>
         )
     }

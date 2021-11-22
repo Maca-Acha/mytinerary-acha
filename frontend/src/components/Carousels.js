@@ -6,7 +6,7 @@ export default function Carousels() {
     return (
         <div className="carrusel-padre">
             <h2 className="popular">Popular MyTineraries</h2>
-            <Container><MultipleRows /></Container>
+            <Container className="tarjetas"><MultipleRows /></Container>
         </div>
     );
 }
