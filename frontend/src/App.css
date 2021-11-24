@@ -22,6 +22,7 @@
   font-size: 1.8rem;
   display: flex;
   align-self: center;
+  margin-right: 1rem;
 }
 
 .encabezado{
@@ -45,6 +46,9 @@
   filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(500deg) brightness(101%) contrast(101%);
 }
 
+.dropdown-toggle{
+  margin-right: 1rem;
+}
 
 /*ICONOS*/
 .iconn{

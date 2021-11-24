@@ -1,12 +1,13 @@
-import { Switch, Route } from "wouter";
+import { Routes, Route } from 'react-router-dom';
 import Home from "../pages/Home";
 import Cities from "../pages/Cities"
 
-export default function Routes (){
+function RoutesManager (){
     return(
-        <Switch>
-            <Route exact path= "/" component= {Home} />
-            <Route path = "/cities" component= {Cities} />
-        </Switch>
+        <Routes>
+            <Route path= "/" element= {<Home />} />
+            <Route path = "/cities" element= {<Cities />} />
+        </Routes>
     )
 }
+export default RoutesManager

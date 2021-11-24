@@ -1,6 +1,7 @@
 import { Navbar, Nav, Container, NavDropdown} from "react-bootstrap"
 import logo2 from "../assets/logo-2.png"
 import { BiUserCircle } from "react-icons/bi";
+import {Link} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 export default function Navigations() {
@@ -16,8 +17,8 @@ export default function Navigations() {
                 <Navbar.Toggle aria-controls='responsive-navbar-nav' />
                 <Navbar.Collapse className="justify-content-end" id='responsive-navbar-nav'>
                     <Nav className="navHome">
-                        <Nav.Link href='/' className='color-font'>Home</Nav.Link>
-                        <Nav.Link href='/cities' className='color-font'>Cities</Nav.Link>
+                            <Link to='/' className='color-font'>Home</Link>
+                            <Link to='/cities' className='color-font'>Cities</Link>
                         <NavDropdown title= {user} className="iconn" id="basic-nav-dropdown">
                             <NavDropdown.Item className="usuario" href="#">Log in</NavDropdown.Item>
                             <NavDropdown.Item className="usuario" href="#">Sing up</NavDropdown.Item>
