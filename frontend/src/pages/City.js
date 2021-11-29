@@ -35,7 +35,7 @@ export default function City (){
                     <p className="texto">{ciudad.description}</p>
                 </div>
                 <div className="cont-mensaje">
-                    <h2 className="mensaje">Under Contraction...</h2>
+                    <h2 className="mensaje">Under Construction</h2>
                 </div>
                 <div className="btns-volver">
                     <Link to="/cities" className="btn-volver">Go back to Cities</Link>
