@@ -19,7 +19,7 @@ export default function Footer() {
                 </nav>
                 <div className="contacto">
                     <p>100-108 W Centre St, Baltimore, MD 21201, EE.UU.</p>
-                    <a class="mail" href="mailto:mdhl@chihockey.org">info@mytinerary.com</a>
+                    <a className="mail" href="mailto:mdhl@chihockey.org">info@mytinerary.com</a>
                     <p className="telefono">+44 20 3500 0202</p>
                 </div>
                 <div className="social-icons">

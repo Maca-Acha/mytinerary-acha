@@ -1,16 +1,16 @@
 const Imagenes = [
-    { name: "London", src: require("../assets/london.jpeg").default },
-    { name: "Barcelona", src: require("../assets/barcelona-spain.jpg").default },
-    { name: "Rome", src: require("../assets/roma-italia.jpg").default },
-    { name: "New York", src: require("../assets/new-york.jpeg").default },
-    { name: "Paris", src: require("../assets/paris.jpeg").default },
-    { name: "Miami", src: require("../assets/miami.jpeg").default },
-    { name: "El Calafate", src: require("../assets/calafate.jpg").default },
-    { name: "Moscow", src: require("../assets/moscu-rusia.jpeg").default },
-    { name: "Sandnes", src: require("../assets/sandnes-norway.jpeg").default },
-    { name: "Philippinas", src: require("../assets/philippinas.jpg").default },
-    { name: "Medellin", src: require("../assets/medellin-colombia.jpg").default },
-    { name: "Banff", src: require("../assets/banf-canada.jpeg").default }
+    { name: "London", src:"../assets/london.jpeg"},
+    { name: "Barcelona", src:"../assets/barcelona-spain.jpg"},
+    { name: "Rome", src:"../assets/roma-italia.jpg"},
+    { name: "New York", src:"../assets/new-york.jpeg"},
+    { name: "Paris", src:"../assets/paris.jpeg"},
+    { name: "Miami", src:"../assets/miami.jpeg"},
+    { name: "El Calafate", src:"../assets/calafate.jpg"},
+    { name: "Moscow", src:"../assets/moscu-rusia.jpeg"},
+    { name: "Sandnes", src:"../assets/sandnes-norway.jpeg"},
+    { name: "Philippinas", src:"../assets/philippinas.jpg"},
+    { name: "Medellin", src:"../assets/medellin-colombia.jpg"},
+    { name: "Banff", src:"../assets/banf-canada.jpeg"}
 ];
 
 export default Imagenes;

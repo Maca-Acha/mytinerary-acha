@@ -26,7 +26,7 @@
 }
 
 .encabezado{
-  background-image: url(../src/assets/foto2.png);
+  background-image: url(../src/assets/travel.jpeg);
   background-position-y: bottom;
   background-repeat: no-repeat;
   background-size: cover;
@@ -95,16 +95,16 @@
   height: 50vh;
 }
 
+h1{
+  font-size: 5rem !important;
+}
+
 p, h1, h2, h3, h5{
   color: #fff;
 }
 
 h2, h5 {
   font-weight: lighter !important;
-}
-
-h1{
-  font-size: 5.5rem;
 }
 
 h5 {
@@ -220,8 +220,6 @@ a:hover{
   color:#2D3962;
 }
 
-
-
 /*BOTONES CARRUSEL*/
 .slick-prev{
   left: -53px !important;
@@ -315,7 +313,7 @@ p {
     height: 100vh;
   }
   .tarjetas{
-    width: 50vw !important;
+    width: 80vw !important;
   }
 }
 @media (max-width: 760px) {
@@ -345,21 +343,20 @@ p {
     margin-bottom: 0.5rem;
   }
 }
-@media (max-width: 600px) {
-  .carrusel-padre{
-    height: 58vh;
-  }
-  .tarjetas{
-    width: 60vw !important;
-  }
-}
 @media (max-width: 500px) {
-  .tarjetas{
-    width: 65vw !important;
+  .slick-next{
+    display: none !important;
+  }
+  .slick-prev{
+    display: none !important;
+  }
+  .carrusel-padre{
+    height: 190vh;
   }
 }
-@media (max-width: 425px) {
-  .tarjetas{
-    width: 72vw !important;
+@media (max-width: 420px) {
+  h1{
+    font-size: 3rem !important;
   }
 }
+
