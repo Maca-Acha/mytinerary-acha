@@ -143,7 +143,7 @@ a:hover{
 .btn-home{
   font-size: 1.5rem !important;
   background: #FA736D !important;
-  border-color: #FA736D!important;
+  border:2px solid #FA736D!important;
   margin-top: 1rem;
   padding: 2vh !important;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
@@ -152,20 +152,21 @@ a:hover{
   display: flex !important;
   align-items: center !important;
   transition: 0.5s;
-  max-width: 315px;
+  max-width: 322px;
   width: 100vw;
   justify-content: space-around;
 }
 
-.icono-flecha{
+/* .icono-flecha{
   display: none;
   transition: 0.5s;
 } 
-
+ */
 .btn-home:hover{
   color: #fff !important;
-  background: #fa746dc4 !important;
-  max-width: 322px;
+  background: #fa746d00 !important;
+  border: 2px solid #fff !important;
+
 }
 
 .btn-home:hover .icono-flecha{
@@ -212,13 +213,13 @@ a:hover{
   justify-content: center;
 }
 
-.tarjeta:hover{
+/* .tarjeta:hover{
   background-color: #fa746d86 !important;
 }
 
 .tarjeta:hover .card-title{
   color:#2D3962;
-}
+} */
 
 /*BOTONES CARRUSEL*/
 .slick-prev{
