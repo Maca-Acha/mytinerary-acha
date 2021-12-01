@@ -5,7 +5,7 @@
 }
 
 .main{
-    height: 60vh !important;
+    height: 20vh !important;
 }
 
 .cont-titulo{
@@ -30,10 +30,6 @@
 
 .mensaje{
     color: #2D3962;
-}
-
-.main{
-    height: 80vh;
 }
 
 .cont-texto{

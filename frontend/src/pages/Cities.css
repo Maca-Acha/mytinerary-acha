@@ -39,6 +39,10 @@
     margin: 2rem 0 ;
 }
 
+.spinner{
+    margin-bottom: 5rem ;
+}
+
 .contenedor-ciudades{
     display: flex;
     align-items: center;

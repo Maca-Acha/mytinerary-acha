@@ -38,23 +38,26 @@ export default function MultipleRows () {
         <div>
             <Slider {...settings} >
                 {ciudades.map((city, index) => {
-                    return (
-                        <div key={index} className="tarjetass">
+                    if(index < 12){
+                        return (
+                            <div key={index} className="tarjetass">
+                                
+                                <Card className="mt-2 tarjeta">
+                                    <Card.Img
+                                        variant="top"
+                                        src={city.src}
+                                    />
+                                    <Card.Body>
+                                        <Card.Title>
+                                            {city.name}
+                                        </Card.Title>
+                                    </Card.Body>
+                                </Card>
+                                
+                            </div>
+                        );
+                    }    
                             
-                            <Card className="mt-2 tarjeta">
-                                <Card.Img
-                                    variant="top"
-                                    src={city.src}
-                                />
-                                <Card.Body>
-                                    <Card.Title>
-                                        {city.name}
-                                    </Card.Title>
-                                </Card.Body>
-                            </Card>
-                            
-                        </div>
-                    );
                 })}
             </Slider>
         </div>

@@ -1,4 +1,5 @@
 import { BsArrowRightShort } from "react-icons/bs";
+import {Link} from "react-router-dom"
 
 export default function Navigations(){
     const flecha = <BsArrowRightShort />
@@ -8,7 +9,7 @@ export default function Navigations(){
             <section className="subtitulo"> 
                 <h2>Find your perfect trip, designed by insiders who know and love their cities!</h2>
             </section>
-            <a href="/cities" className="btn-home">Choose your destination <span className="icono-flecha">{flecha}</span></a>
+            <Link to="/cities" className="btn-home">Choose your destination <span className="icono-flecha">{flecha}</span></Link>
         </div>
     )
 }

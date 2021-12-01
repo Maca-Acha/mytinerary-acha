@@ -1,36 +1,40 @@
 import React, {useEffect, useState} from 'react'
 import '../pages/Cities.css'
-import {Link, useParams} from "react-router-dom"
+import {Link} from "react-router-dom"
+import { Spinner } from "react-bootstrap";
 
 
 function CardCities () {
     const [ciudades, setCiudades] = useState([])
     const [search, setSearch] = useState([])
-    const params = useParams()
+    const [loading, setLoading] = useState(false)
 
     useEffect(()=>{
         fetch("http://localhost:4000/api/cities")
         .then(res => res.json())
-        .then(data => setCiudades(data.response))
+        .then(data => {
+            setLoading(true)
+            setCiudades(data.response)
+        })
         .catch(err => console.log(err.message))
     },[])
     
     const filter = ciudades.filter((city) =>
-    city.name.toLowerCase().startsWith(search)
-    )
+    city.name.toLowerCase().startsWith(search))
     return(
         <div >
             <div className="contenedor-ciudades container">
             <input
-                onChange={(e) => 
-                    setSearch(e.target.value.toLocaleLowerCase().trimStart().trimEnd())
+                onChange = {(e) => 
+                    setSearch(e.target.value.toLocaleLowerCase().trim())
                 }
                 type="text"
                 className="buscador"
                 placeholder="Search a City"
                 />
                 <div className="card-ciudad">
-                    {filter.length > 0 ? (
+                    {!loading ? <Spinner className="spinner" animation="border" variant="danger" />:
+                    filter.length > 0 ? (
                         filter.map(ciudad => {
                             return(
                                 <Link to={`/city/${ciudad._id}`}>

@@ -1,16 +1,16 @@
-const City = require('../models/City')
+/* const Itinerary = require('../models/Itinerary')
 
-const citiesControllers = {
+const itineraryControllers = {
     returnCities:(req,res)=>{
         City.find()
         .then((response)=> res.json({response}))
     
-}, 
+    }, 
     returnCity:(req,res)=>{
         City.findOne({_id: req.params.id})
             .then((response) =>{res.json({response})
     })  
-},
+    },
     createCity:(req,res)=>{
         const {name, src, description}= req.body
         const city = new City({name, src, description}).save()
@@ -39,4 +39,7 @@ const citiesControllers = {
     }
 }
 
-module.exports = citiesControllers 
+module.exports = itineraryControllers 
+
+
+ */
