@@ -21,7 +21,7 @@ function CardCity (props){
 
     return(
         <div>
-            <div className="hero-city" style={backgroundCity}>
+            <div className="hero-city"  key={props.city._id} style={backgroundCity}>
                 <Navigation  />
             </div>
             <div className="cont-titulo">

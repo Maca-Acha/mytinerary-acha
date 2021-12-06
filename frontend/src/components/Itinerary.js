@@ -9,7 +9,6 @@ export default function Itinerary(props) {
     function precio(price) {
         return Array.from({length: price})
     }
-    console.log(props)
     return (
         <div className="itinerarios">
             {props.itineraries.length > 0 &&
@@ -18,12 +17,12 @@ export default function Itinerary(props) {
                     <Card.Header className="header-itinerary color-text">{itinerary.title}</Card.Header>
                     <Card.Body className="cont-card">
                         <div className="usuario">
-                            <img className="singleCard" variant="top" src={itinerary.src} />
+                            <img key={itinerary._id} className="singleCard" variant="top" src={itinerary.src} />
                             <p>{itinerary.name}</p>
                         </div>
                         <div className="texto-itinerario">
                             <div className="like">
-                                <p className="color-text">Likes: {corazon}</p>
+                                <p className="color-text">{corazon}</p>
                             </div>
                             <span className="duracion">Duration: {itinerary.duration}Hs</span>
                             <div className="precio">
