@@ -1,6 +1,17 @@
-*{
-
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
 
 /*NAVEGADOR*/
 .nav{
@@ -317,7 +328,7 @@ p {
   }
   .nav-2{
     flex-direction: row;
-    width: 65%;
+    width: 90%;
     justify-content: space-around;
     padding: 1rem;
   }
@@ -348,6 +359,16 @@ p {
 @media (max-width: 420px) {
   h1{
     font-size: 3rem !important;
+  }
+  .direccion{
+    text-align: center;
+    font-size: .8rem;
+  }
+  .mail{
+    font-size: .8rem;
+  }
+  .telefono{
+    font-size: .8rem;
   }
 }
 
