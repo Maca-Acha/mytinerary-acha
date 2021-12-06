@@ -13,9 +13,8 @@ const citiesControllers = {
 },
     createCity:(req,res)=>{
         const {name, src, description}= req.body
-        const city = new City({name, src, description}).save()
+        new City({name, src, description}).save()
         .then((response)=> res.json({response}))
-        console.log(city)
     },
     deleteCity: async (req,res) =>{
         const id = req.params
@@ -27,11 +26,8 @@ const citiesControllers = {
         res.json({success:true})
     },
     modifyCity: async(req,res) => {
-        let id =req.params.id
-        let city = req.body
-        let actualizado
         try{
-            actualizado = await City.findOneAndUpdate({_id:id}, {city}, {new:true})
+            actualizado = await City.findOneAndUpdate({_id:req.params.id}, {...req.body}, {new:true})
         }catch(error){
             console.log(error)
         }

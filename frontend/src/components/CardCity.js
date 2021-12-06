@@ -1,39 +1,59 @@
 import { useParams } from 'react-router-dom'
-import { useState, useEffect } from 'react'
 import Navigation from '../components/Navigation'
+import citiesActions from '../redux/actions/citiesActions'
+import itinerariesActions from '../redux/actions/itinerariesActions'
+import {connect} from 'react-redux'
+import Itinerary from './Itinerary'
+import {useEffect} from "react"
 
-export default function CardCity (){
-    const [ciudad, setCiudad] = useState([])
+function CardCity (props){
     const params = useParams()
-    console.log(params.id)
-    useEffect(()=>{
-        fetch("http://localhost:4000/api/city/" + params.id )
-        .then(res => res.json())
-        .then(data => setCiudad(data.response))
-        .catch(err => console.log(err.message))
-    },[])
-    const back = {
-        backgroundImage: "url(" + ciudad.src + ")",
-        width: "100%",
-        height: "50vh",
-        "background-repeat": "no-repeat",
-        "background-position": "40%",
-        "background-size": "cover"
+    
+    useEffect(() => {
+        !props.cities[0] && props.getCities() 
+        props.cities[0] && props.findCity(props.cities, params.id)
+        props.getItineraries(params.id)
+    }, [props.cities])
+
+    const backgroundCity = {
+        backgroundImage: "url(" + props.city.src + ")"
     }
+
     return(
-        <div className="caca">
-            <div className="hero-city" style={back}>
-                        <Navigation  />
-                        </div>
+        <div>
+            <div className="hero-city" style={backgroundCity}>
+                <Navigation  />
+            </div>
             <div className="cont-titulo">
-                <h3 className="titulito">{ciudad.name}</h3>
+                <h3 className="titulito">{props.city.name}</h3>
             </div>
             <div className="cont-texto container">
-                <p className="texto">{ciudad.description}</p>
+                <p className="texto-city">{props.city.description}</p>
             </div>
-            <div className="cont-mensaje">
-                <h2 className="mensaje">Under Construction</h2>
-            </div>
+            {props.itineraries[0] ? 
+            (
+            <Itinerary itineraries={props.itineraries} /> // preguntar
+            ) : 
+            (
+                <h2 className="mensaje-construccion">Under construction...</h2>
+            )}
         </div>
     )
 }
+
+
+const mapDispatchToProps = {
+    findCity: citiesActions.findCity,
+    getCities: citiesActions.getCities,
+    getItineraries: itinerariesActions.getItineraries,
+}
+
+const mapStateToProps = (state) => {
+    return {
+        cities: state.citiesReducer.cities,
+        city: state.citiesReducer.city,
+        itineraries: state.itinerariesReducer.itineraries,
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(CardCity)

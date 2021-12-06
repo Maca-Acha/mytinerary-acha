@@ -213,14 +213,6 @@ a:hover{
   justify-content: center;
 }
 
-/* .tarjeta:hover{
-  background-color: #fa746d86 !important;
-}
-
-.tarjeta:hover .card-title{
-  color:#2D3962;
-} */
-
 /*BOTONES CARRUSEL*/
 .slick-prev{
   left: -53px !important;
@@ -239,6 +231,10 @@ a:hover{
 }
 
 /*FOOTER*/
+.direccion, .telefono, .copyright{
+  color: #fff !important;
+}
+
 .footer{
   background-color: #2d3962e5;
   
@@ -288,6 +284,8 @@ p {
   margin-top: .5rem !important;
   margin-bottom: .5rem !important;
 }
+
+
 
 /*MEDIA-QUERY (RESPONSIVO)*/
 @media (max-width: 1037px) {

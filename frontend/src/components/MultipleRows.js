@@ -1,18 +1,12 @@
 import Slider from "react-slick";
-import React, {useEffect, useState} from 'react'
 import {Card} from "react-bootstrap";
-import {Link} from "react-router-dom"
+import { connect } from "react-redux";
+import citiesActions from "../redux/actions/citiesActions";
 
-export default function MultipleRows () {
-    const [ciudades, setCiudades] = useState([])
+
+function MultipleRows (props) {
+    !props.cities[0] && props.getCities()
     
-    useEffect(()=>{
-        fetch("http://localhost:4000/api/cities")
-        .then(res => res.json())
-        .then(data => setCiudades(data.response))
-        .catch(err => console.log(err.message))
-    },[])
-
     const settings = {
         className: "center",
         centerMode: false,
@@ -37,11 +31,10 @@ export default function MultipleRows () {
     return (
         <div>
             <Slider {...settings} >
-                {ciudades.map((city, index) => {
+                {props.cities.length > 0 && props.cities.map((city, index) => {
                     if(index < 12){
                         return (
                             <div key={index} className="tarjetass">
-                                
                                 <Card className="mt-2 tarjeta">
                                     <Card.Img
                                         variant="top"
@@ -53,14 +46,24 @@ export default function MultipleRows () {
                                         </Card.Title>
                                     </Card.Body>
                                 </Card>
-                                
                             </div>
                         );
                     }    
-                            
                 })}
             </Slider>
         </div>
     );
     
 }
+
+const mapDispatchToProps = {
+    getCities: citiesActions.getCities,
+}
+
+const mapStateToProps = (state) => {
+    return {
+        cities: state.citiesReducer.cities
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(MultipleRows)
