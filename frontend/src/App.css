@@ -136,7 +136,6 @@ a{
 }
 
 a:hover{
-  /* text-decoration: underline !important; */
   color: #FA736D !important;
 }
 
@@ -157,11 +156,6 @@ a:hover{
   justify-content: space-around;
 }
 
-/* .icono-flecha{
-  display: none;
-  transition: 0.5s;
-} 
- */
 .btn-home:hover{
   color: #fff !important;
   background: #fa746d00 !important;
@@ -284,8 +278,6 @@ p {
   margin-top: .5rem !important;
   margin-bottom: .5rem !important;
 }
-
-
 
 /*MEDIA-QUERY (RESPONSIVO)*/
 @media (max-width: 1037px) {
