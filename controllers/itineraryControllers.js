@@ -19,10 +19,10 @@ const itineraryControllers = {
             .catch((err) => console.log(err))
     },
     createItinerary:(req,res)=>{
-        const {name, title, src, price, like, description, hashtags, comment, city}= req.body
-        const itinerary = new Itinerary(req.body).save()
-        .then((response)=> res.json({response}))
-        .catch((e) => res.json({error: e.errors.price}))
+        /* const {name, title, src, price, like, description, hashtags, comment, city}= req.body */
+        new Itinerary(req.body).save()
+        .then((response)=> res.json({itinerary: response, success:true})) //para que en el postman te informe si se guardo o no
+        .catch((e) => res.json({error: e.errors.price, success:false}))
     },
     deleteItinerary: async (req,res) =>{
         const id = req.params
