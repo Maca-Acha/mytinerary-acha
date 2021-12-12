@@ -8,7 +8,7 @@ class SignUp extends Component  {
         return (
             <div>
                 <div className="back-img">
-                    <Navigation />
+                    
                     <div className="mainSignUp">
                         <SignUpComponent />
                     </div>

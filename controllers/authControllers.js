@@ -29,16 +29,18 @@ const authControllers = {
         const {password, email} = req.body
         try{
             const emailExist = await User.findOne({email})
-            if(!emailExist){
-                res.json({success: false, error: "The email is incorrect", response: null}) //CAMBIAR MENSAJE
-            }else{
+            if(emailExist){
                 let passwordSuccess = bcryptjs.compareSync(password, emailExist.password)
+                console.log("hola tu viejA")
                 if(passwordSuccess){
                     const token = jwt.sign({...emailExist}, process.env.SECRET_KEY)
-                    res.json({success:true, response: emailExist , error:null})
+                    console.log(req)
+                    res.json({success:true, response:{token, emailExist }, error:null})
                 }else{
                     res.json({success: false, error: "The password is incorrect", response: null}) //CAMBIAR MENSAJE
                 }
+            }else{
+                res.json({success: false, error: "The email is incorrect", response: null}) //CAMBIAR MENSAJE
             }
         }catch(error){
         res.json({success: false, response: null, error: error})

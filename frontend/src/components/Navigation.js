@@ -11,7 +11,7 @@ export default function Navigations() {
             <Navbar collapseOnSelect className='nav' expand='lg'>
             <Container>
                 <Navbar.Brand href="/" className="titulo-logo">
-                    <img src={logo2} className="logo2" />
+                    <img alt="logo" src={logo2} className="logo2" />
                     <h2 className="titulo">MyTinerary</h2>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls='responsive-navbar-nav' />

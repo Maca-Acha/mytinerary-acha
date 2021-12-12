@@ -33,7 +33,8 @@
     "mongoose": "^6.0.13",
     "npm": "^8.3.0",
     "passport": "^0.5.0",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "react-google-login": "^5.2.2"
   },
   "devDependencies": {
     "-": "^0.0.1",

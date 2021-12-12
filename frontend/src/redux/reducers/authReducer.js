@@ -1,7 +1,7 @@
 const initialState ={
     state:[],
     newUser:{},
-    user:{}
+    user: {}
 }
 
 const authReducer = (state = initialState, action) =>{
@@ -15,7 +15,17 @@ const authReducer = (state = initialState, action) =>{
             return{
                 ...state,
                 user: action.payload
-            }
+            } 
+        case 'SIGN_IN':
+            return{
+                ...state,
+                user: action.payload
+            } 
+        case 'SIGN_OUT':
+            return{
+                ...state,
+                user: action.payload
+            } 
             default: return state
     }
 }
