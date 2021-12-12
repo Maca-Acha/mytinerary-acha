@@ -1,7 +1,8 @@
-const Router = require ('express').Router();
+const Router = require ('express').Router()
+const authControllers = require('../controllers/authControllers')
 const citiesControllers = require('../controllers/citiesControllers')
 const itineraryControllers = require('../controllers/itineraryControllers')
-
+const validator = require('../config/validator')
 Router.route('/cities')
 .get(citiesControllers.returnCities)
 .post(citiesControllers.createCity)
@@ -23,6 +24,16 @@ Router.route('/itineraries/:id')
 .put(itineraryControllers.modifyItinerary)
 
 Router.route("/itinerary/:city")
-.get(itineraryControllers.returnItinerariesByCity)
+.get(itineraryControllers.returnItinerariesByCity) //usarla en el componente de itinerarios - eliminar getItinerary en cardCity(o cities)
+
+Router.route('/auth/signUp')
+.post(validator, authControllers.signUp)
+
+
+Router.route('/auth/signIn')
+.post(validator, authControllers.signIn)
+
+Router.route('/auth/users')
+.get(authControllers.readUsers)
 
 module.exports = Router

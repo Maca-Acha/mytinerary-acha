@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import CardCity from '../components/CardCity'
 import Footer from '../components/Footer'
-import './City.css'
-
 
 class City extends Component  {
     render(){

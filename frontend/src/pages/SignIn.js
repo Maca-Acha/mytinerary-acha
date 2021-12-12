@@ -1,19 +1,18 @@
 import React, {Component} from 'react'
 import Navigation from '../components/Navigation'
-import CardCities from '../components/CardCities'
 import Footer from '../components/Footer'
+import SignInComponent from '../components/SignInComponents'
 
-class Cities extends Component  {
+class SignIn extends Component  {
     render(){
         return (
             <div>
-                <div className="back-ciudades">
+                <div className="back-img">
                     <Navigation />
-                    <div className="cont-titulo1 container">
-                        <h1 className="titulo-ciudades">Cities</h1>
+                    <div className="mainSignUp">
+                        <SignInComponent />
                     </div>
                 </div>
-                <CardCities /> 
                 <Footer />
                 <p className="copyright">©MyTinerary | Proyect2021</p>
             </div>
@@ -21,4 +20,4 @@ class Cities extends Component  {
     }
 }
 
-export default Cities
+export default SignIn

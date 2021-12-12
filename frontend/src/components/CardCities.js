@@ -1,12 +1,15 @@
-
-import '../pages/Cities.css'
 import {Link} from "react-router-dom"
 import { Spinner } from "react-bootstrap"; 
 import citiesActions from '../redux/actions/citiesActions';
 import {connect} from 'react-redux'
+import useConstructor from '../utilities/useConstructor';
 
 function CardCities (props) {
     !props.cities[0] && props.getCities()
+    useConstructor(() => {
+        props.setLoad()
+    })
+
     return(
         <div >
             <div className="contenedor-ciudades container">
@@ -23,7 +26,7 @@ function CardCities (props) {
                     (props.auxiliar.length > 0 ? (
                         props.auxiliar.map(ciudad => {
                             return(
-                                <Link to={`/city/${ciudad._id}`}>
+                                <Link key={ciudad._id} to={`/city/${ciudad._id}`}>
                                     <div className="card-imagen ">
                                     <img className="imagen" key={ciudad._id} alt= {ciudad.name} src={ciudad.src} />
                                     <div className="texto-ciudades">
@@ -45,13 +48,15 @@ function CardCities (props) {
 
 const mapDispatchToProps = {
     filterCities: citiesActions.filterCities,
-    getCities: citiesActions.getCities
+    getCities: citiesActions.getCities,
+    setLoad: citiesActions.setLoad
 }
 
 const mapStateToProps = (state) => {
     return {
         cities: state.citiesReducer.cities,
-        auxiliar: state.citiesReducer.auxiliar
+        auxiliar: state.citiesReducer.auxiliar,
+        loading: state.citiesReducer.loading
     }
 }
 

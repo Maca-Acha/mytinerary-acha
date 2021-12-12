@@ -20,8 +20,8 @@ export default function Navigations() {
                             <Link to='/' className='color-font'>Home</Link>
                             <Link to='/cities' className='color-font'>Cities</Link>
                         <NavDropdown title= {user} className="iconn" id="basic-nav-dropdown">
-                            <NavDropdown.Item className="usuario" href="#">Log in</NavDropdown.Item>
-                            <NavDropdown.Item className="usuario" href="#">Sing up</NavDropdown.Item>
+                            <NavDropdown.Item className="usuario" href="/signin">Sign in</NavDropdown.Item>
+                            <NavDropdown.Item className="usuario" href="/signup">Sign up</NavDropdown.Item>
                         </NavDropdown>  
                     </Nav>
                 </Navbar.Collapse>

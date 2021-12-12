@@ -5,15 +5,19 @@ import itinerariesActions from '../redux/actions/itinerariesActions'
 import {connect} from 'react-redux'
 import Itinerary from './Itinerary'
 import {useEffect} from "react"
+import {Spinner} from "react-bootstrap"
+import useConstructor from '../utilities/useConstructor'
 
 function CardCity (props){
     const params = useParams()
-    
+    useConstructor(() => {
+        props.setLoad()
+    })
+    console.log(props)
     useEffect(() => {
-        !props.cities[0] && props.getCities() 
-        props.cities[0] && props.findCity(props.cities, params.id)
+        props.getCity(params.id)
         props.getItineraries(params.id)
-    }, [props.cities])
+    }, [])
 
     const backgroundCity = {
         backgroundImage: "url(" + props.city.src + ")"
@@ -30,29 +34,32 @@ function CardCity (props){
             <div className="cont-texto container">
                 <p className="texto-city">{props.city.description}</p>
             </div>
-            {props.itineraries[0] ? 
-            (
-            <Itinerary itineraries={props.itineraries} /> // preguntar
-            ) : 
-            (
-                <h2 className="mensaje-construccion">Under construction...</h2>
-            )}
+
+            {props.city ? (
+                    props.itineraries.length > 0 
+                    ? (props.itineraries.map(itinerary=>
+                    <Itinerary key={itinerary._id}  itinerary={itinerary} id={params.id} />)) : 
+                    (
+                    <h2 className="mensaje-construccion">There are not itineraries for this city yet...</h2>
+                    )): <Spinner className="spinner" animation="border" variant="danger" />
+            }
         </div>
     )
 }
 
 
 const mapDispatchToProps = {
-    findCity: citiesActions.findCity,
+    getCity: citiesActions.getCity,
     getCities: citiesActions.getCities,
     getItineraries: itinerariesActions.getItineraries,
+    setLoad: citiesActions.setLoad
 }
 
 const mapStateToProps = (state) => {
     return {
-        cities: state.citiesReducer.cities,
         city: state.citiesReducer.city,
         itineraries: state.itinerariesReducer.itineraries,
+        loading: state.citiesReducer.loading
     }
 }
 
