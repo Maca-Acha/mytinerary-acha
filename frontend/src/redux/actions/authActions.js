@@ -13,7 +13,9 @@ const authActions = {
                     })
                     dispatch({type:'NEW_USER', payload: user.data.response})
                 }else{
-                    toast.error(user.data.error)
+                    toast.error(user.data.error, {
+                        position: toast.POSITION.TOP_CENTER
+                    })
                 }
             }catch(error){
                 console.log(error)
@@ -32,7 +34,9 @@ const authActions = {
                     })
                     dispatch({type:'SIGN_IN', payload: user.data.response})
                 }else{
-                    toast.error(user.data.error)
+                    toast.error(user.data.error, {
+                        position: toast.POSITION.TOP_CENTER
+                    })
                 }
             }catch(error){
                 console.log(error)
