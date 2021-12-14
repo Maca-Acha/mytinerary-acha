@@ -43,7 +43,7 @@ function SignIn (props) {
                 </form>
                 <GoogleLogin
                         clientId="113911854537-8j68k30a4qpl884ffcvk7hvdfmsdlfnc.apps.googleusercontent.com"
-                        buttonText="Sign Up with Google"
+                        buttonText="Sign in with Google"
                         onSuccess={responseGoogle}
                         onFailure={responseGoogle}
                         cookiePolicy={'single_host_origin'}
