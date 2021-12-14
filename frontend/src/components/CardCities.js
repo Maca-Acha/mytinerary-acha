@@ -16,7 +16,7 @@ function CardCities (props) {
             <input
                 onChange = {(e) => 
                     props.filterCities(props.cities, e.target.value.toLocaleLowerCase().trim())
-                } 
+                } /* eslint-disable jsx-a11y/alt-text */
                 type="text"
                 className="buscador"
                 placeholder="Search a City"

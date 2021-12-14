@@ -13,9 +13,9 @@ export default function Itinerary({itinerary}) {
         return Array.from({length: price})
     }
     return (
-        <div  id={itinerary._id} className="itinerarios">
-                <Card key={itinerary._id+1} className="card-itinerary">
-                    <Card.Header key={itinerary._id+3} className="header-itinerary color-texto">{itinerary.title}</Card.Header>
+        <div key= {itinerary._id} className="itinerarios">
+                <Card  className="card-itinerary">
+                    <Card.Header className="header-itinerary color-texto">{itinerary.title}</Card.Header>
                     <Card.Body className="card-body" >
                         <div className="cont-card">
                             <div className="usuario">
@@ -27,7 +27,7 @@ export default function Itinerary({itinerary}) {
                                     <p className="duracion">Duration: {itinerary.duration}Hs</p>
                                     <div className="precio">
                                         <p className="color-texto">Price:</p> {precio(itinerary.price).map((index) => (
-                                            <span key={index} className="plata">{plata}</span>
+                                            <span key={index + 1} className="plata">{plata}</span>
                                         ))}
                                     </div>    
                                     <div className="like">
@@ -36,14 +36,14 @@ export default function Itinerary({itinerary}) {
                                 </div>
                                 <div className="hashtags">
                                     {itinerary.hashtags.map((hash, index) => (
-                                        <div key={index+1} className="color-texto"> #{hash}</div>
+                                        <div key={hash} className="color-texto"> #{hash}</div>
                                     ))}
                                 </div>
                             </div>
                         </div>
                         <div className="btn-ver-mas">
                             {display && (
-                                <h4>Under Construction...</h4>
+                                <h4 className="texto-construccion">Under Construction...</h4>
                             )}
                             <button onClick={handleClick} className="btn-ver">
                                 {" "}

@@ -15,12 +15,12 @@ export default function Footer() {
                 <nav className="nav-2">
                     <Link to="/" className="nav2">Home</Link>
                     <Link to="/cities" className="nav2">Cities</Link>
-                    <Link to="#" className="nav2">Log in</Link>
-                    <Link to="#" className="nav2">Sing up</Link>
+                    <Link to="/signin" className="nav2">Sign in</Link>
+                    <Link to="/signup" className="nav2">Sing up</Link>
                 </nav>
                 <div className="contacto">
                     <p className="direccion">100-108 W Centre St, Baltimore, MD 21201, EE.UU.</p>
-                    <a className="mail" href="mailto:mdhl@chihockey.org">info@mytinerary.com</a>
+                    <p className="mail" >info@mytinerary.com</p>
                     <p className="telefono">+44 20 3500 0202</p>
                 </div>
                 <div className="social-icons">

@@ -1,17 +1,12 @@
 const initialState ={
     state:[],
-    newUser:{},
-    user: {}
+    user: {},
+    token:""
 }
 
 const authReducer = (state = initialState, action) =>{
     switch(action.type){
         case 'NEW_USER':
-            return{
-                ...state,
-                newUser: action.payload
-            }
-        case 'USER':
             return{
                 ...state,
                 user: action.payload
@@ -20,12 +15,19 @@ const authReducer = (state = initialState, action) =>{
             return{
                 ...state,
                 user: action.payload
-            } 
-        case 'SIGN_OUT':
-            return{
+            }
+        case "TOKEN":
+            return {
                 ...state,
-                user: action.payload
-            } 
+                token: action.payload,
+                user: action.payload,
+            }
+        case "SIGN_OUT":
+            return {
+                ...state,
+                token: action.payload,
+                user: action.payload,
+            }
             default: return state
     }
 }

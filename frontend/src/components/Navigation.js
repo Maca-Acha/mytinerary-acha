@@ -1,11 +1,14 @@
 import { Navbar, Nav, Container, NavDropdown} from "react-bootstrap"
 import logo2 from "../assets/logo-2.png"
-import { BiUserCircle } from "react-icons/bi";
+import { BiUserCircle } from "react-icons/bi"
 import {Link} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
+import {connect} from 'react-redux'
+import authActions from "../redux/actions/authActions"
 
-export default function Navigations() {
-    const user = <BiUserCircle />
+function Navigations(props) {
+    localStorage.getItem("token") && !props.token && props.signToken()
+    const userIcon = <BiUserCircle />
     return (
         <>
             <Navbar collapseOnSelect className='nav' expand='lg'>
@@ -19,10 +22,34 @@ export default function Navigations() {
                     <Nav className="navHome">
                             <Link to='/' className='color-font'>Home</Link>
                             <Link to='/cities' className='color-font'>Cities</Link>
-                        <NavDropdown title= {user} className="iconn" id="basic-nav-dropdown">
-                            <NavDropdown.Item className="usuario" href="/signin">Sign in</NavDropdown.Item>
-                            <NavDropdown.Item className="usuario" href="/signup">Sign up</NavDropdown.Item>
-                        </NavDropdown>  
+                            {!props.token ? (
+                                <NavDropdown title= {userIcon} className="iconn" id="basic-nav-dropdown">
+                                    <NavDropdown.Item as={Link} className="usuario" to="/signin">Sign in</NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} className="usuario" to="/signup">Sign up</NavDropdown.Item>
+                                </NavDropdown> 
+                            ):(
+                                <>
+                                    <NavDropdown
+                                        className="cont-nav-img"
+                                        title={
+                                            <img
+                                            src={
+                                                props.user.photo
+                                                ? props.user.photo
+                                                : ""
+                                            }
+                                            className="nav-img"
+                                            alt="user_photo"
+                                            />
+                                        }
+                                        id="basic-nav-dropdown"
+                                    >
+                                    <NavDropdown.Item as={Link} to="/" onClick={() => {props.signOut()}} className="usuario">
+                                        Sign out
+                                    </NavDropdown.Item>
+                                    </NavDropdown>
+                                </> 
+                            )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
@@ -31,3 +58,16 @@ export default function Navigations() {
         </>
         )
     } 
+
+const mapDispatchToProps = {
+    signToken: authActions.signToken,
+    signOut: authActions.signOut,
+}
+const mapStateToProps = (state) => {
+    return {
+        user: state.authReducer.user,
+        token: state.authReducer.token,
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigations)

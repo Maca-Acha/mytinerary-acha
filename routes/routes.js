@@ -33,8 +33,9 @@ Router.route('/auth/signUp')
 .get(authControllers.readUsers)
 
 Router.route('/auth/signIn')
-.post(passport.authenticate('jwt', {session:false}), authControllers.signIn)
+.post(authControllers.signIn)
 
-
+Router.route('/auth') //autenticacion del token y llamo a la accion chekearToken
+.get(passport.authenticate('jwt', {session:false}), authControllers.chekearToken)
 
 module.exports = Router

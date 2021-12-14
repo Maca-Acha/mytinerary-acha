@@ -1,66 +1,67 @@
 import axios from "axios"
+import {toast} from 'react-toastify'
 
 const authActions = {
-    postUser: (name, lastName, email, password, photo, country)=>{
+    postUser: (newUser)=>{
         return async(dispatch, getState)=>{
             try{
-                const user = await axios.post("http://localhost:4000/api/auth/signUp",{name, lastName, email, password, photo, country})
-                if(user.data.success && !user.data.error){
+                const user = await axios.post("http://localhost:4000/api/auth/signUp",{...newUser})
+                if(user.data.success ){
                     localStorage.setItem('token', user.data.response.token)
+                    toast.success("Welcome " + user.data.response.newUser.name, {
+                        position: toast.POSITION.TOP_CENTER
+                    })
                     dispatch({type:'NEW_USER', payload: user.data.response})
                 }else{
-                    return{errors: user.data.response}
+                    toast.error(user.data.error)
                 }
             }catch(error){
                 console.log(error)
             }
         }
     },
-    signIn: (email,password)=>{
+    signIn: (email,password,google)=>{
         return async(dispatch, getState)=>{
             try{
-                const token = localStorage.getItem('token')
-                const user = await axios.post("http://localhost:4000/api/auth/signIn",{email,password}, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    }
-                })
-                console.log(user)
+                const user = await axios.post("http://localhost:4000/api/auth/signIn",{email,password,google})
                 if(user.data.success && !user.data.error){
                     localStorage.setItem('token', user.data.response.token)
-                    dispatch({type:'USER', payload: user.data.response})
+                    
+                    toast.success("Welcome " + user.data.response.emailExist.name, {
+                        position: toast.POSITION.TOP_CENTER
+                    })
+                    dispatch({type:'SIGN_IN', payload: user.data.response})
                 }else{
-                    alert(user.data.error)
+                    toast.error(user.data.error)
                 }
             }catch(error){
                 console.log(error)
             }
         }
     },
-    signInToken: (userToken)=>{
-        return async(dispatch, getState)=>{
-            try{
-            const userToLog = await axios.get("http://localhost:4000/api/auth/signInLS",{
-                headers:{
-                'Authorization':'Bearer '+ userToken
+    signToken: ()=>{
+        return async (dispatch, getState) => {
+            try {
+            const token = localStorage.getItem("token")
+            const response = await axios.get("http://localhost:4000/api/auth",{
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                }
+            )
+            dispatch({ type: "TOKEN",payload: response.data})
+            } catch (error) {
+            console.error(error)
             }
-            })
-            if (userToLog.data.success) {
-                dispatch({type:"SIGN_IN", payload:{...userToLog.data, token:userToken}})
-            }else{
-                return(userToLog.data)
-            }
-        }catch (errores){
-            console.log(errores)
-            dispatch({type:"SIGN_OUT",payload:{user:null}}) // PORQUE SIGN_OUT
-            return("noUser")
-        }
         }
     },
     signOut: () => {
-        return (dispatch, getState)=>{
-            dispatch({type: "SIGN_OUT",payload:{user:null}})
-        }
+        localStorage.removeItem("token")
+    return (dispatch, getState) => {
+        dispatch({type: "SIGN_OUT", payload: null})
+    }
     }
 }
+
+
 export default authActions

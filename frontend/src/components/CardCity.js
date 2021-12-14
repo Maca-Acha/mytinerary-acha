@@ -13,12 +13,11 @@ function CardCity (props){
     useConstructor(() => {
         props.setLoad()
     })
-    console.log(props)
     useEffect(() => {
         props.getCity(params.id)
         props.getItineraries(params.id)
     }, [])
-
+    
     const backgroundCity = {
         backgroundImage: "url(" + props.city.src + ")"
     }
@@ -37,8 +36,8 @@ function CardCity (props){
 
             {props.city ? (
                     props.itineraries.length > 0 
-                    ? (props.itineraries.map(itinerary=>
-                    <Itinerary key={itinerary._id}  itinerary={itinerary} id={params.id} />)) : 
+                    ? (props.itineraries.map((itinerary, index)=>
+                    <Itinerary key={index} itinerary={itinerary} id={params.id} />)) : 
                     (
                     <h2 className="mensaje-construccion">There are not itineraries for this city yet...</h2>
                     )): <Spinner className="spinner" animation="border" variant="danger" />

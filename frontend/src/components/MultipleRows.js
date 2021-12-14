@@ -34,7 +34,7 @@ function MultipleRows (props) {
                 {props.cities.length > 0 && props.cities.map((city, index) => {
                     if(index < 12){
                         return (
-                            <div key={index+3} className="tarjetass">
+                            <div key={city.name} className="tarjetass">
                                 <Card className="mt-2 tarjeta">
                                     <Card.Img
                                         variant="top"
