@@ -514,7 +514,7 @@ p{
   justify-content: center;
 }
 .btn-submit{
-  width: 12vw;
+  width: 185px;
   background-color: #FA736D;
   border-radius: 2px;
   padding: .5rem;
@@ -659,9 +659,7 @@ p {
   .inputs {
     width: 40vw
   }
-  .btn-submit{
-    width: 20vw;
-  }
+
 }
 @media(max-width:992px){
   .cont-formulario {
@@ -797,6 +795,7 @@ p {
   .inputs {
     width: 60vw;
   }
+
 }
 @media (max-width: 500px) {
   .slick-next{
@@ -834,6 +833,7 @@ p {
     font-size: .8rem ;
   }
 }
+
 
 
 
