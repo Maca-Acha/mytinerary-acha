@@ -19,6 +19,7 @@ function SignIn (props) {
     
     const email = useRef()
     const password = useRef()
+
     function handleSignUp(e){
         e.preventDefault()
         props.signIn(
@@ -60,8 +61,8 @@ function SignIn (props) {
 }
 
 const mapDispatchToProps = {
-    signIn: authActions.signIn,
-    signToken: authActions.signToken
+    signToken: authActions.signToken,
+    signIn: authActions.signIn
 }
 
 const mapStateToProps = (state) => {

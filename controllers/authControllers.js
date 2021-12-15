@@ -10,11 +10,12 @@ const authControllers = {
             if (userExist){
                 res.json({success: false, error: "The username is already registered", response:null})
             }else{
-                const passwordHasheada = bcryptjs.hashSync(password,10)
+                const passwordHasheada = bcryptjs.hashSync(password, 10) //10 pasos a encriptar
                 const newUser = new User ({name, lastName, email, password:passwordHasheada, photo, country, google} )
-                await newUser.save()
+                await newUser.save() //guarda en el mongo de mierda 
                 const token = jwt.sign({...newUser}, process.env.SECRET_KEY)
                 res.json({success: true, response: {token, newUser}, error: null})
+                
             }
         }catch(error){
             res.json({success: false, response: null, error: error})
@@ -32,8 +33,8 @@ const authControllers = {
             if(emailExist){
                 let passwordSuccess = bcryptjs.compareSync(password, emailExist.password)
                 if(passwordSuccess){
-                    const token = jwt.sign({...emailExist}, process.env.SECRET_KEY)
-                    console.log(req)
+                    const token = jwt.sign({...emailExist}, process.env.SECRET_KEY) //.env clave para encriptar el token
+                    //lo transforma en un token
                     res.json({success:true, response:{token, emailExist }, error:null})
                 }else{
                     res.json({success: false, error: "The password is incorrect", response: null})

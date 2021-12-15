@@ -20,12 +20,12 @@ const itineraryControllers = {
     },
     createItinerary:(req,res)=>{
         /* const {name, title, src, price, like, description, hashtags, comment, city}= req.body */
-        new Itinerary(req.body).save()
+        new Itinerary({...req.body}).save()
         .then((response)=> res.json({itinerary: response, success:true})) //para que en el postman te informe si se guardo o no
         .catch((e) => res.json({error: e.errors.price, success:false}))
     },
     deleteItinerary: async (req,res) =>{
-        const id = req.params
+        const id = req.params.id
         let itineraries
         try{
             await Itinerary.findOneAndDelete({_id:id})

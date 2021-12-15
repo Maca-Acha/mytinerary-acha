@@ -28,7 +28,6 @@ const authActions = {
                 const user = await axios.post("http://localhost:4000/api/auth/signIn",{email,password,google})
                 if(user.data.success && !user.data.error){
                     localStorage.setItem('token', user.data.response.token)
-                    
                     toast.success("Welcome " + user.data.response.emailExist.name, {
                         position: toast.POSITION.TOP_CENTER
                     })
@@ -51,7 +50,7 @@ const authActions = {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
-                }
+            }
             )
             dispatch({ type: "TOKEN",payload: response.data})
             } catch (error) {

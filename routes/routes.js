@@ -2,6 +2,7 @@ const Router = require ('express').Router()
 const authControllers = require('../controllers/authControllers')
 const citiesControllers = require('../controllers/citiesControllers')
 const itineraryControllers = require('../controllers/itineraryControllers')
+const activitiesControllers = require('../controllers/activitiesControlles')
 const validator = require('../config/validator')
 const passport = require('../config/passport')
 
@@ -26,7 +27,7 @@ Router.route('/itineraries/:id')
 .put(itineraryControllers.modifyItinerary)
 
 Router.route("/itinerary/:city")
-.get(itineraryControllers.returnItinerariesByCity) //usarla en el componente de itinerarios - eliminar getItinerary en cardCity(o cities)
+.get(itineraryControllers.returnItinerariesByCity) 
 
 Router.route('/auth/signUp')
 .post(validator, authControllers.signUp)
@@ -37,5 +38,17 @@ Router.route('/auth/signIn')
 
 Router.route('/auth') //autenticacion del token y llamo a la accion chekearToken
 .get(passport.authenticate('jwt', {session:false}), authControllers.chekearToken)
+
+Router.route('/activities')
+.post(activitiesControllers.postActivity)
+.get(activitiesControllers.returnActivities)
+
+Router.route('/activities/:id')
+.get(activitiesControllers.returnActivity)
+.put(activitiesControllers.modifyActivity)
+.delete(activitiesControllers.deleteActivity)
+
+Router.route("/activity/:itinerary")
+.get(activitiesControllers.returnActivitiesByItinerary) 
 
 module.exports = Router

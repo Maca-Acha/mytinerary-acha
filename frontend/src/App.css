@@ -19,12 +19,14 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
+  
 }
 .nav-img{
   width: 3rem;
   height: 3rem;
   border-radius: 50%; 
   align-self: center;
+  object-fit: cover;
 }
 .nav{
   background: rgb(0,0,0);
