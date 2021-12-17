@@ -2,7 +2,6 @@ const Activity = require('../models/Activity')
 
 const activityControllers = {
     postActivity:(req,res)=>{
-        /* const {name, title, src, price, like, description, hashtags, comment, city}= req.body */
         new Activity(req.body).save()
         .then((response)=> res.json({activity: response, success:true})) //para que en el postman te informe si se guardo o no
         .catch((e) => res.json({error: e.errors, success:false}))
@@ -18,8 +17,10 @@ const activityControllers = {
         .then((response)=> res.json({response}))
     }, 
     returnActivitiesByItinerary: (req, res) => {
-        Activity.find({itinerary: {_id: req.params.itinerary}}) /*REVISAAAAAAR*/
+        console.log(req.body)
+        Activity.find({itinerary: {_id: req.params.itineraryId}})
             .then((response) => {
+                console.log(response)
                 res.json({response})
             })
             .catch((err) => console.log(err))

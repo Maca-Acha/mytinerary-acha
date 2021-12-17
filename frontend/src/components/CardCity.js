@@ -7,6 +7,7 @@ import Itinerary from './Itinerary'
 import {useEffect} from "react"
 import {Spinner} from "react-bootstrap"
 import useConstructor from '../utilities/useConstructor'
+import authActions from '../redux/actions/authActions'
 
 function CardCity (props){
     const params = useParams()
@@ -37,7 +38,7 @@ function CardCity (props){
             {props.city ? (
                     props.itineraries.length > 0 
                     ? (props.itineraries.map((itinerary, index)=>
-                    <Itinerary key={index} itinerary={itinerary} id={params.id} />)) : 
+                    <Itinerary key={index} itinerary={itinerary} cityId={params.id} user={props.user} activities={props.activities} />)) : 
                     (
                     <h2 className="mensaje-construccion">There are not itineraries for this city yet...</h2>
                     )): <Spinner className="spinner" animation="border" variant="danger" />
@@ -51,14 +52,18 @@ const mapDispatchToProps = {
     getCity: citiesActions.getCity,
     getCities: citiesActions.getCities,
     getItineraries: itinerariesActions.getItineraries,
-    setLoad: citiesActions.setLoad
+    setLoad: citiesActions.setLoad,
+    signToken: authActions.signToken,
 }
 
 const mapStateToProps = (state) => {
     return {
         city: state.citiesReducer.city,
         itineraries: state.itinerariesReducer.itineraries,
-        loading: state.citiesReducer.loading
+        loading: state.citiesReducer.loading,
+        activities: state.activitiesReducer.activities,
+        token: state.authReducer.token,
+        user: state.authReducer.user
     }
 }
 

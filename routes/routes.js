@@ -3,6 +3,7 @@ const authControllers = require('../controllers/authControllers')
 const citiesControllers = require('../controllers/citiesControllers')
 const itineraryControllers = require('../controllers/itineraryControllers')
 const activitiesControllers = require('../controllers/activitiesControlles')
+const likesControllers = require('../controllers/likesControllers')
 const validator = require('../config/validator')
 const passport = require('../config/passport')
 
@@ -48,7 +49,9 @@ Router.route('/activities/:id')
 .put(activitiesControllers.modifyActivity)
 .delete(activitiesControllers.deleteActivity)
 
-Router.route("/activity/:itinerary")
+Router.route("/activity/:itineraryId")
 .get(activitiesControllers.returnActivitiesByItinerary) 
+
+Router.route('/like').put(likesControllers.likes)
 
 module.exports = Router
