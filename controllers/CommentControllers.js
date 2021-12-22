@@ -34,7 +34,9 @@ const commentControllers = {
     },
     editComment: async (req, res) => {
         try {
-            let newComment = await Comment.findOneAndUpdate({ _id: req.body.id }, { message: req.body.message });
+            let newComment = await Comment.findOneAndUpdate(
+                {_id: req.body.commentId , user:req.user._id}, {message: req.body.message},{new:true}
+            );
             res.json({
                 success: true,
                 response: newComment,
@@ -46,7 +48,7 @@ const commentControllers = {
     },
     deleteComment: async (req, res) => {
         try {
-            await Comment.findOneAndDelete({ _id: req.body.id });
+            await Comment.findOneAndDelete({ _id: req.body.commentId });
             res.json({
             success: true,
             response: "Deleted comment with id" + req.body.id,

@@ -42,6 +42,26 @@ const itinerariesActions = {
             dispatch({type: "POST_COMMENTS", payload: res.data.response })
         }
     },
+    editComments: (commentId, message) => {
+        return async(dispatch, getState)=>{
+            const token = localStorage.getItem("token")
+            let response = await axios.put("http://localhost:4000/api/comments" , {commentId, message}, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            let res = await axios.get("http://localhost:4000/api/comments")
+            dispatch({type: "EDIT_COMMENTS", payload: res.data.response })
+        }
+    },
+    deleteComments: (commentId) => {
+        return async(dispatch, getState)=>{
+            let response = await axios.delete("http://localhost:4000/api/comments" , {commentId})
+
+            let res = await axios.get("http://localhost:4000/api/comments")
+            dispatch({type: "DELETE_COMMENTS", payload: res.data.response })
+        }
+    },
     
 }
 

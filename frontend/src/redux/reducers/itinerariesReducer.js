@@ -1,7 +1,7 @@
 const initialState = {
     state:[],
     itineraries: [],
-    comments: []
+    comments: [],
 }
 
 const itinerariesReducer = (state = initialState, action) => {
@@ -27,6 +27,16 @@ const itinerariesReducer = (state = initialState, action) => {
                 comments: action.payload
             } 
         case 'POST_COMMENTS':
+            return{
+                ...state,
+                comments: action.payload
+            } 
+        case 'EDIT_COMMENTS':
+            return{
+                ...state,
+                comments: action.payload
+            } 
+        case 'DELETE_COMMENTS':
             return{
                 ...state,
                 comments: action.payload

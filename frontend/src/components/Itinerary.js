@@ -67,100 +67,97 @@ function Itinerary(props) {
     function precio(price) {
         return Array.from({length: price})
     }
-    
+    console.log(props.comments)
 
     return (
         <div key= {props.itinerary._id} className="itinerarios">
-                <Card  className="card-itinerary">
-                    <Card.Header className="header-itinerary color-texto">{props.itinerary.title}</Card.Header>
-                    <Card.Body className="card-body" >
-                        <div className="cont-card">
-                            <div className="usuario">
-                                <img key= {props.itinerary._id} className="foto-perfil" variant="top" src={props.itinerary.src} />
-                                <p>{props.itinerary.name}</p>
-                            </div>
-                            <div className="texto-itinerario">
-                                <div className="duracion-costo">
-                                    <p className="duracion">Duration: {props.itinerary.duration}Hs</p>
-                                    <div className="precio">
-                                        <p className="color-texto">Price:</p> {precio(props.itinerary.price).map((index) => (
-                                            <span key={index + 1} className="plata">{plata}</span>
-                                        ))}
-                                    </div>    
-                                    <div className="like">
-                                    <p className="corazones" onClick={() => handleLike()}>
-                                        {liked ? 
-                                        <img className="corazon" src="../assets/like-rojo.png"></img> : 
-                                        <img className="corazon" src="../assets/like.png"></img>}
-                                    </p><p>{likes}</p>
-                                    </div>
-                                </div>
-                                <div className="hashtags">
-                                    {props.itinerary.hashtags.map((hash, index) => (
-                                        <div key={hash} className="color-texto hashtag"> #{hash}</div>
-                                    ))}
-                                </div>
-                                
-                            </div>
+            <Card  className="card-itinerary">
+                <Card.Header className="header-itinerary color-texto">{props.itinerary.title}</Card.Header>
+                <Card.Body className="card-body" >
+                    <div className="cont-card">
+                        <div className="usuario">
+                            <img key= {props.itinerary._id} className="foto-perfil" variant="top" src={props.itinerary.src} />
+                            <p>{props.itinerary.name}</p>
                         </div>
-                        <Carousel className="actividades">
-                            {display && (
-                                props.activities[0] && props.activities.map(activity => 
-                                    {if(activity.itinerary._id === props.itinerary._id){
-                                        return(
-                                                <Carousel.Item>
-                                                    <img
-                                                    className="activit-img"
-                                                    src={activity.image}
-                                                    alt="First slide"
-                                                    />
-                                                    <Carousel.Caption>
-                                                    <h3 className="activit-titulo">{activity.title}</h3>
-                                                    {/* <p>{activity.description}</p> */}
-                                                    </Carousel.Caption>
-                                                </Carousel.Item>
-                                        )
-                                    }else{
-                                        <h2>Under Construction</h2>
-                                    }
-                                }
-                                )
-                            )}
+                        <div className="texto-itinerario">
+                            <div className="duracion-costo">
+                                <p className="duracion">Duration: {props.itinerary.duration}Hs</p>
+                                <div className="precio">
+                                    <p className="color-texto">Price:</p> {precio(props.itinerary.price).map((index) => (
+                                        <span key={index + 1} className="plata">{plata}</span>
+                                    ))}
+                                </div>    
+                                <div className="like">
+                                <p className="corazones" onClick={() => handleLike()}>
+                                    {liked ? 
+                                    <img className="corazon" src="../assets/like-rojo.png"></img> : 
+                                    <img className="corazon" src="../assets/like.png"></img>}
+                                </p><p>{likes}</p>
+                                </div>
+                            </div>
+                            <div className="hashtags">
+                                {props.itinerary.hashtags.map((hash, index) => (
+                                    <div key={hash} className="color-texto hashtag"> #{hash}</div>
+                                ))}
+                            </div>
                             
-                        </Carousel>
-                        {display && (props.comments && props.comments.map(comment => 
-                            {
+                        </div>
+                    </div>
+                    <div className="actividades">
+                        {display && (
+                            props.activities[0] && props.activities.map(activity => 
+                                {if(activity.itinerary._id === props.itinerary._id){
+                                    return(
+                                        <div className="actividad">
+                                            <div
+                                                className="activit-img"
+                                                style={{ backgroundImage: `url("${activity.image}")` }}
+                                            >
+                                                <h3 className="activit-titulo">{activity.title}</h3>
+                                                {/* <p>{activity.description}</p> */}
+                                            </div>
+                                        </div>
+                                    )
+                                }else{
+                                    <h2>Under Construction</h2>
+                                }
+                                }
+                            )
+                        )}
+                    </div>
+                    {display && (
+                        <div className="formu-comentarios">
+                            {props.comments && /* (props.comments[0].itinerary === props.itinerary._id ) ?  */ props.comments.map(comment => {
                                 if(comment.itinerary === props.itinerary._id){
                                     return(
-                                        <div>
-                                            <Comments comment={comment} itinerary={props.itinerary._id} user={props.user} /> 
-                                            
+                                        <div >
+                                            <Comments comment={comment} itinerary={props.itinerary._id} user={props.user} />
                                         </div>
                                     )
                                 }
-                            }      
-                        ))
-                        } 
-                        {display && (
-                            <form onSubmit={handleComment}>
-                                <input
-                                    ref={comment}
-                                    type="text"
-                                    className="comentar"
-                                    placeholder="escribime algo"
-                                    />
-                                <div className='submit'>
-                                        <input className='btn-submit' type="submit" value="Submit" />
-                                </div>
-                            </form>
-                        )}   
-                        <button onClick= {handleClick} className="btn-ver">
-                            {" "}
-                            {display ? "View less" : "View more"}
-                        </button>
-                    </Card.Body>
-                </Card>
-            </div>
+                            })/* : <p className="msj-comentario">No Comments</p>  */
+                            }
+                        </div>
+                    )
+                    } 
+                    {display && (
+                        <form className="input-comentar" onSubmit={handleComment}>
+                            <input
+                                ref={comment}
+                                type="text"
+                                className="comentar"
+                                placeholder= "Leave your comment here"
+                                />
+                            <input className='btn-submit btn-comentar' type="submit" value="Submit" />
+                        </form>
+                    )}   
+                    <button onClick= {handleClick} className="btn-ver">
+                        {" "}
+                        {display ? "View less" : "View more"}
+                    </button>
+                </Card.Body>
+            </Card>
+        </div>
     )
 }
 
@@ -174,7 +171,8 @@ const mapDispatchToProps = {
 }
 const mapStateToProps = (state) => {
     return {
-        comments: state.itinerariesReducer.comments
+        comments: state.itinerariesReducer.comments,
+        token: state.itinerariesReducer.token
     }
 }
 
