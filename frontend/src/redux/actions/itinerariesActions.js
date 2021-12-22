@@ -35,6 +35,14 @@ const itinerariesActions = {
             
         }
     },
+    postComments: (itineraryId, user, message) => {
+        return async(dispatch, getState)=>{
+            let response = await axios.post("http://localhost:4000/api/comments/" + itineraryId, {user, message})
+            let res = await axios.get("http://localhost:4000/api/comments")
+            dispatch({type: "POST_COMMENTS", payload: res.data.response })
+        }
+    },
+    
 }
 
 export default itinerariesActions;

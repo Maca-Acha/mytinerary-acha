@@ -6,7 +6,8 @@ import activitiesActions from "../redux/actions/activitiesActions"
 import itinerariesActions from "../redux/actions/itinerariesActions"
 import {Carousel} from "react-bootstrap"
 import { toast } from "react-toastify"
-import Comments from "./CommentsCommponent"
+import Comments from "./CommentsComponent"
+import {useRef} from "react"
 
 function Itinerary(props) {
     const plata = <AiOutlineDollarCircle />
@@ -38,8 +39,19 @@ function Itinerary(props) {
         props.getActivities(props.itinerary._id)
         props.getAllComments()
     }
+    const comment = useRef()
     
-    console.log(props.comments)
+    function handleComment(e){
+        e.preventDefault()
+        props.postComments(
+            props.itinerary._id,
+            props.user._id,
+            comment.current.value
+        )
+        comment.current.value = ""
+            
+    }
+
     function handleLike() {
         if (localStorage.getItem("token")) {
             setliked(!liked)
@@ -120,12 +132,28 @@ function Itinerary(props) {
                             {
                                 if(comment.itinerary === props.itinerary._id){
                                     return(
-                                        <Comments comment={comment} itinerary={props.itinerary._id} /> 
+                                        <div>
+                                            <Comments comment={comment} itinerary={props.itinerary._id} user={props.user} /> 
+                                            
+                                        </div>
                                     )
                                 }
                             }      
                         ))
-                        }    
+                        } 
+                        {display && (
+                            <form onSubmit={handleComment}>
+                                <input
+                                    ref={comment}
+                                    type="text"
+                                    className="comentar"
+                                    placeholder="escribime algo"
+                                    />
+                                <div className='submit'>
+                                        <input className='btn-submit' type="submit" value="Submit" />
+                                </div>
+                            </form>
+                        )}   
                         <button onClick= {handleClick} className="btn-ver">
                             {" "}
                             {display ? "View less" : "View more"}
@@ -141,6 +169,7 @@ function Itinerary(props) {
 const mapDispatchToProps = {
     getActivities: activitiesActions.getActivities,
     getAllComments: itinerariesActions.getAllComments,
+    postComments: itinerariesActions.postComments,
     likes: itinerariesActions.likes
 }
 const mapStateToProps = (state) => {

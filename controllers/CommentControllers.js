@@ -18,9 +18,10 @@ const commentControllers = {
         }
     },
     postComment: async (req, res) => {
-        const { user, itinerary, message } = req.body;
+        const itinerary = req.params.itineraryId
+        const { user, message } = req.body;
         try {
-            await new Comment({ user, itinerary, message }).save();
+            await new Comment({itinerary, user, message }).save();
             res.json({
                 success: true,
                 response: "Uploaded comment with message: " + message,
