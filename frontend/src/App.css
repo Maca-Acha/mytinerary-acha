@@ -364,13 +364,16 @@ input{
 .color-texto{
   color: #2D3962;
 }
-.corazon{
-  color: red;
+.corazones{
+  display: flex;
   align-self: center;
+}
+.corazon{
+  width: 1rem;
+  margin-right: .3rem;
 }
 .like{
   display: flex;
-  justify-content: flex-end;
   margin-left: 1rem;
 }
 .numero-like{
@@ -381,6 +384,8 @@ input{
   display: flex;
   flex-direction: column;
   width: 35vw;
+  height: 30vh;
+  align-items: space-around;
   align-self:center;
 }
 .itinerarios{
@@ -426,6 +431,27 @@ input{
 p{
   color: #2D3962 !important;
 }
+/*ACTIVIDADES*/
+.actividades{
+  display: flex;
+  justify-content: center;
+  padding: .5rem;
+  object-fit: cover;
+  object-position: center;
+}
+.activit-titulo{
+  font-weight: normal !important;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.733);
+}
+.activit-img{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 0.2rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.733);
+  height: 30vh;
+  width: 35vw !important;
+} 
 /*FOTO ITINERARIO*/
 .card{
   border: 0;
@@ -466,8 +492,11 @@ p{
 }
 .hashtags{
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
+  justify-content: center;
+}
+.hashtag{
+  margin-right: .5rem;
 }
 /*BOTON VER MAS*/
 .card{

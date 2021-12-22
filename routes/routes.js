@@ -4,6 +4,7 @@ const citiesControllers = require('../controllers/citiesControllers')
 const itineraryControllers = require('../controllers/itineraryControllers')
 const activitiesControllers = require('../controllers/activitiesControlles')
 const likesControllers = require('../controllers/likesControllers')
+const commentControllers = require('../controllers/commentControllers')
 const validator = require('../config/validator')
 const passport = require('../config/passport')
 
@@ -37,7 +38,7 @@ Router.route('/auth/signUp')
 Router.route('/auth/signIn')
 .post(authControllers.signIn)
 
-Router.route('/auth') //autenticacion del token y llamo a la accion chekearToken
+Router.route('/auth')
 .get(passport.authenticate('jwt', {session:false}), authControllers.chekearToken)
 
 Router.route('/activities')
@@ -53,5 +54,16 @@ Router.route("/activity/:itineraryId")
 .get(activitiesControllers.returnActivitiesByItinerary) 
 
 Router.route('/like').put(likesControllers.likes)
+
+Router.route('/comments/:itineraryId')
+.get(commentControllers.getComments)
+.post(commentControllers.postComment) 
+
+Router.route('/comments')
+.get(commentControllers.getAllComments)
+
+Router.route('/comments/:id')
+.put(commentControllers.editComment) 
+.delete(commentControllers.deleteComment) 
 
 module.exports = Router

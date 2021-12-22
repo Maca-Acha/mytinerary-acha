@@ -20,6 +20,13 @@ const itinerariesActions = {
                 })
             }
         }
+    },
+    getComments: (itineraryId) => {
+        return async (dispatch, getState) => {
+            let response = await axios.get("http://localhost:4000/api/comments/" + itineraryId)
+            dispatch({type: "GET_COMMENTS", payload: response.data.response })
+            
+        }
     }
 }
 

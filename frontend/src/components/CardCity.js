@@ -7,7 +7,6 @@ import Itinerary from './Itinerary'
 import {useEffect} from "react"
 import {Spinner} from "react-bootstrap"
 import useConstructor from '../utilities/useConstructor'
-import authActions from '../redux/actions/authActions'
 
 function CardCity (props){
     const params = useParams()
@@ -53,7 +52,6 @@ const mapDispatchToProps = {
     getCities: citiesActions.getCities,
     getItineraries: itinerariesActions.getItineraries,
     setLoad: citiesActions.setLoad,
-    signToken: authActions.signToken,
 }
 
 const mapStateToProps = (state) => {

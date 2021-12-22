@@ -1,41 +1,64 @@
 import {Card} from "react-bootstrap"
 import {useEffect, useState} from "react"
-import { AiOutlineHeart } from "react-icons/ai"
 import { AiOutlineDollarCircle } from "react-icons/ai"
 import {connect} from 'react-redux'
 import activitiesActions from "../redux/actions/activitiesActions"
 import itinerariesActions from "../redux/actions/itinerariesActions"
-import Activity from "./ActivityComponent"
+import {Carousel} from "react-bootstrap"
+import { toast } from "react-toastify"
+import Comments from "./Comments"
 
 function Itinerary(props) {
-    const corazon = <AiOutlineHeart />
     const plata = <AiOutlineDollarCircle />
-    console.log(props)
     const [display, setDisplay] = useState(false)
-    /* const handleClick = () => {
-        setDisplay(!display)
-        props.getActivities(props.itinerary._id)
-    } */
+    const [liked, setliked] = useState("")
+    const [likes, setlikes] = useState("")
+
+    if (!localStorage.getItem("token") && liked === "") {
+        setliked(false)
+    }
+
     useEffect(() => {
-        props.activities[0] && console.log(props.activities)
+    !props.user && setliked(false)
+    }, [props.user])
+    
+    if (props.itinerary && liked === "" && likes === "") {
+        if(props.user){
+        setliked(props.itinerary.likes.some((id) => id === props.user._id))
+        }
+        setlikes(props.itinerary.likes.length)
+    }
+    
+    useEffect(() => {
         !props.activities[0] && props.getActivities(props.itinerary._id)
     }, [props.activities])
+
+    const handleClick = () => {
+        setDisplay(!display)
+        props.getActivities(props.itinerary._id)
+        props.getComments(props.itinerary._id)
+    }
+    console.log(props.comments)
+
+    function handleLike() {
+        if (localStorage.getItem("token")) {
+            setliked(!liked)
+            liked ? setlikes(likes - 1) : setlikes(likes + 1)
+            props.likes(props.user._id, props.itinerary._id, props.params)
+        } else {
+            toast.warning("Please sign in to like this itinerary", {
+            position: toast.POSITION.TOP_CENTER,
+            })
+        }
+    }
 
     function precio(price) {
         return Array.from({length: price})
     }
+    
+
     return (
         <div key= {props.itinerary._id} className="itinerarios">
-                {/* <div className="tuchota">
-                    {props.activities.map((activity)=>  <p src={activity.title} />)}
-                    
-                    {props.activities.map(activity => {
-                        <>
-                            <h1>concha</h1>
-                            <img className="actividad-img" src={activity.image} />
-                        </>
-                    })}
-                </div> */}
                 <Card  className="card-itinerary">
                     <Card.Header className="header-itinerary color-texto">{props.itinerary.title}</Card.Header>
                     <Card.Body className="card-body" >
@@ -52,56 +75,71 @@ function Itinerary(props) {
                                             <span key={index + 1} className="plata">{plata}</span>
                                         ))}
                                     </div>    
-                                    <div className="like" onClick={()=> props.likes(props.user._id, props.itinerary._id, props.cityId)} >
-                                        <span className="corazon">{corazon}</span><span className="numero-like" >{props.itinerary.likes.length}</span>
+                                    <div className="like">
+                                    <p className="corazones" onClick={() => handleLike()}>
+                                        {liked ? 
+                                        <img className="corazon" src="../assets/like-rojo.png"></img> : 
+                                        <img className="corazon" src="../assets/like.png"></img>}
+                                    </p><p>{likes}</p>
                                     </div>
                                 </div>
                                 <div className="hashtags">
                                     {props.itinerary.hashtags.map((hash, index) => (
-                                        <div key={hash} className="color-texto"> #{hash}</div>
+                                        <div key={hash} className="color-texto hashtag"> #{hash}</div>
                                     ))}
                                 </div>
                                 
                             </div>
                         </div>
-                        <div className="btn-ver-mas">
+                        <Carousel className="actividades">
                             {display && (
                                 props.activities[0] && props.activities.map(activity => 
                                     {if(activity.itinerary._id === props.itinerary._id){
                                         return(
-                                            <div className="activity">
-                                                <div className="activityPic" style={{backgroundImage:`url("${activity.image}")` }}>
-                                                    <h5>{activity.title}</h5>
-                                                </div>
-                                            </div> 
+                                                <Carousel.Item>
+                                                    <img
+                                                    className="activit-img"
+                                                    src={activity.image}
+                                                    alt="First slide"
+                                                    />
+                                                    <Carousel.Caption>
+                                                    <h3 className="activit-titulo">{activity.title}</h3>
+                                                    {/* <p>{activity.description}</p> */}
+                                                    </Carousel.Caption>
+                                                </Carousel.Item>
                                         )
-                                    }}
+                                    }else{
+                                        <h2>Under Construction</h2>
+                                    }
+                                }
                                 )
                             )}
-                            <button onClick={() => { 
-                                setDisplay(!display) 
-                                props.getActivities(props.itinerary._id)
-                            }} className="btn-ver">
-                                {" "}
-                                {display ? "View less" : "View more"}
-                            </button>
-                        </div>
+                            
+                        </Carousel>
+                                
+                        <Comments comments={props.comments} itinerary={props.itinerary} />        
+                                
+                        <button onClick= {handleClick} className="btn-ver">
+                            {" "}
+                            {display ? "View less" : "View more"}
+                        </button>
                     </Card.Body>
                 </Card>
             </div>
     )
 }
 
+
+
 const mapDispatchToProps = {
     getActivities: activitiesActions.getActivities,
+    getComments: itinerariesActions.getComments,
     likes: itinerariesActions.likes
 }
-
-/* const mapStateToProps = (state) => {
-    console.log(state)
+const mapStateToProps = (state) => {
     return {
-        activities: state.activitiesReducer.activities,
+        comments: state.itinerariesReducer.comments
     }
 }
- */
-export default connect(null, mapDispatchToProps)(Itinerary)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Itinerary)

@@ -19,9 +19,8 @@ const itineraryControllers = {
             .catch((err) => console.log(err))
     },
     createItinerary:(req,res)=>{
-        /* const {name, title, src, price, like, description, hashtags, comment, city}= req.body */
         new Itinerary({...req.body}).save()
-        .then((response)=> res.json({itinerary: response, success:true})) //para que en el postman te informe si se guardo o no
+        .then((response)=> res.json({itinerary: response, success:true}))
         .catch((e) => res.json({error: e.errors.price, success:false}))
     },
     deleteItinerary: async (req,res) =>{
@@ -44,7 +43,6 @@ const itineraryControllers = {
         res.json({success:actualizado ? true : false})
     }
 }
-
 
 module.exports = itineraryControllers 
 

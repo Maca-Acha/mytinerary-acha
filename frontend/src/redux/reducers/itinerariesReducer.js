@@ -1,6 +1,7 @@
 const initialState = {
     state:[],
     itineraries: [],
+    comments: []
 }
 
 const itinerariesReducer = (state = initialState, action) => {
@@ -14,6 +15,11 @@ const itinerariesReducer = (state = initialState, action) => {
             return{
                 ...state,
                 itineraries: action.payload
+            } 
+        case 'GET_COMMENTS':
+            return{
+                ...state,
+                comments: action.payload
             } 
             default: return state
         

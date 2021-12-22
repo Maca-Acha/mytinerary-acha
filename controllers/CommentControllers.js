@@ -1,29 +1,59 @@
-const Commentary = require("../models/Commentary"); // importamos el modelo para poder usarlo 
+const Comment = require("../models/Comment");
 
-
-const commentaryController = { // creamos un objeto itineraryController
-    getComments: async(req, res)=>{
-        try{
-            const itineraryId = req.params.id
-            let itinerary = await Commentary.findOne({_id:itineraryId}).populate("comments.user")
-            const comments = itinerary.comments.map(comment => ({comment:{text:comment.comment, _id:comment._id}, user:{firstName:comment.user.firstName, image:comment.user.image, lastName: comment.user.lastName, userId:comment.user._id}}))
-            res.json({success:true, response:comments})
-        }catch(error){
-            res.json({success:false, response:[{comment:"Error"}]})
+const commentControllers = {
+    getAllComments:async (req, res) => {
+        Comment.find()
+        .then(response => {res.json({success: true, response: response})})
+        
+    },
+    getComments: async (req, res) => {
+        try {
+            let commentList = await Comment.find({
+                itinerary: req.params.itineraryId,
+            }).populate({ path: "user", select: ["name", "email", "photo"]});
+            res.json({ success: true, error: null, response: commentList });
+        } catch (e) {
+            res.json({ success: false, error: e, response: null });
         }
     },
-    postComment: async(req, res)=>{  // Create a new comment
-        try{
-            const {comment, itineraryId} = req.body
-            const userId = req.user._id
-            const itinerary = await Commentary.findOne({_id:itineraryId})
-            itinerary.comments.push({comment, user:userId})
-            await itinerary.save()
-            res.json({success:true, response:itinerary.comments})
-        }catch(error){
-            res.json({success:false, response:[{comment:"Error"}]})
+    postComment: async (req, res) => {
+        const { user, itinerary, message } = req.body;
+        try {
+            await new Comment({ user, itinerary, message }).save();
+            res.json({
+                success: true,
+                response: "Uploaded comment with message: " + message,
+                error: null,
+            });
+        } catch (e) {
+            res.json({ success: false, error: e, response: null });
+            console.error(e);
+        }
+    },
+    editComment: async (req, res) => {
+        try {
+            let newComment = await Comment.findOneAndUpdate({ _id: req.body.id }, { message: req.body.message });
+            res.json({
+                success: true,
+                response: newComment,
+            });
+        } catch (e) {
+            res.json({ success: false, error: e });
+            console.error(e);
+        }
+    },
+    deleteComment: async (req, res) => {
+        try {
+            await Comment.findOneAndDelete({ _id: req.body.id });
+            res.json({
+            success: true,
+            response: "Deleted comment with id" + req.body.id,
+            });
+        } catch (e) {
+            res.json({ success: false, error: e });
+            console.error(e);
         }
     }
 }
 
-module.exports = commentaryController
+module.exports = commentControllers 
