@@ -27,7 +27,14 @@ const itinerariesActions = {
             dispatch({type: "GET_COMMENTS", payload: response.data.response })
             
         }
-    }
+    },
+    getAllComments: () => {
+        return async (dispatch, getState) => {
+            let response = await axios.get("http://localhost:4000/api/comments")
+            dispatch({type: "GET_ALL_COMMENTS", payload: response.data.response })
+            
+        }
+    },
 }
 
 export default itinerariesActions;

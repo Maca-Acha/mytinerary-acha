@@ -21,6 +21,11 @@ const itinerariesReducer = (state = initialState, action) => {
                 ...state,
                 comments: action.payload
             } 
+        case 'GET_ALL_COMMENTS':
+            return{
+                ...state,
+                comments: action.payload
+            } 
             default: return state
         
     }

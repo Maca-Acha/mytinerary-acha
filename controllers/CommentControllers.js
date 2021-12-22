@@ -3,6 +3,7 @@ const Comment = require("../models/Comment");
 const commentControllers = {
     getAllComments:async (req, res) => {
         Comment.find()
+        .populate({ path: "user", select: ["name", "email", "photo"]})
         .then(response => {res.json({success: true, response: response})})
         
     },

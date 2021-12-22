@@ -6,7 +6,7 @@ import activitiesActions from "../redux/actions/activitiesActions"
 import itinerariesActions from "../redux/actions/itinerariesActions"
 import {Carousel} from "react-bootstrap"
 import { toast } from "react-toastify"
-import Comments from "./Comments"
+import Comments from "./CommentsCommponent"
 
 function Itinerary(props) {
     const plata = <AiOutlineDollarCircle />
@@ -36,10 +36,10 @@ function Itinerary(props) {
     const handleClick = () => {
         setDisplay(!display)
         props.getActivities(props.itinerary._id)
-        props.getComments(props.itinerary._id)
+        props.getAllComments()
     }
+    
     console.log(props.comments)
-
     function handleLike() {
         if (localStorage.getItem("token")) {
             setliked(!liked)
@@ -116,9 +116,16 @@ function Itinerary(props) {
                             )}
                             
                         </Carousel>
-                                
-                        <Comments comments={props.comments} itinerary={props.itinerary} />        
-                                
+                        {display && (props.comments && props.comments.map(comment => 
+                            {
+                                if(comment.itinerary === props.itinerary._id){
+                                    return(
+                                        <Comments comment={comment} itinerary={props.itinerary._id} /> 
+                                    )
+                                }
+                            }      
+                        ))
+                        }    
                         <button onClick= {handleClick} className="btn-ver">
                             {" "}
                             {display ? "View less" : "View more"}
@@ -133,7 +140,7 @@ function Itinerary(props) {
 
 const mapDispatchToProps = {
     getActivities: activitiesActions.getActivities,
-    getComments: itinerariesActions.getComments,
+    getAllComments: itinerariesActions.getAllComments,
     likes: itinerariesActions.likes
 }
 const mapStateToProps = (state) => {
