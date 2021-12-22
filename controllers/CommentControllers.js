@@ -35,7 +35,7 @@ const commentControllers = {
     editComment: async (req, res) => {
         try {
             let newComment = await Comment.findOneAndUpdate(
-                {_id: req.body.commentId , user:req.user._id}, {message: req.body.message},{new:true}
+                {_id: req.body.commentId , user:req.user._id}, {message: req.body.message}
             );
             res.json({
                 success: true,
@@ -48,10 +48,11 @@ const commentControllers = {
     },
     deleteComment: async (req, res) => {
         try {
-            await Comment.findOneAndDelete({ _id: req.body.commentId });
+            await Comment.findOneAndDelete({ _id: req.params.commentId , user:req.user._id });
+            console.log("te borre")
             res.json({
-            success: true,
-            response: "Deleted comment with id" + req.body.id,
+                success: true,
+                response: "Deleted comment with id" + req.body.id,
             });
         } catch (e) {
             res.json({ success: false, error: e });

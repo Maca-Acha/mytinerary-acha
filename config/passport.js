@@ -6,24 +6,24 @@ const User = require("../models/User")
 
 module.exports = passport.use(
     new jwtStrategy(
-    {
-        jwtFromRequest: extractJwt.fromAuthHeaderAsBearerToken(),
-        secretOrKey: process.env.SECRET_KEY,
-    },
-    (jwt_payload, done) => {
-        console.log(done)
-        User.findOne({_id: jwt_payload._doc._id})
-            .then((user) => {
-            if (user) {
-                return done(null, user)     
-            } else {
-                return done(null, false)
-            }
-            })
-            .catch((err) => {
-            console.log(err)
-            return done(err, false)
-            })
+        {
+            jwtFromRequest: extractJwt.fromAuthHeaderAsBearerToken(),
+            secretOrKey: process.env.SECRET_KEY,
+        },
+        (jwt_payload, done) => {
+            console.log(done)
+            User.findOne({_id: jwt_payload._doc._id})
+                .then((user) => {
+                if (user) {
+                    return done(null, user)     
+                } else {
+                    return done(null, false)
+                }
+                })
+                .catch((err) => {
+                console.log(err)
+                return done(err, false)
+                })
         }
     )
 )

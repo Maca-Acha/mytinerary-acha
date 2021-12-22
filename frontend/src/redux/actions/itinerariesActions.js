@@ -32,7 +32,6 @@ const itinerariesActions = {
         return async (dispatch, getState) => {
             let response = await axios.get("http://localhost:4000/api/comments")
             dispatch({type: "GET_ALL_COMMENTS", payload: response.data.response })
-            
         }
     },
     postComments: (itineraryId, user, message) => {
@@ -56,13 +55,16 @@ const itinerariesActions = {
     },
     deleteComments: (commentId) => {
         return async(dispatch, getState)=>{
-            let response = await axios.delete("http://localhost:4000/api/comments" , {commentId})
-
+            const token = localStorage.getItem("token")
+            let response = await axios.delete("http://localhost:4000/api/comments" + commentId , {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
             let res = await axios.get("http://localhost:4000/api/comments")
             dispatch({type: "DELETE_COMMENTS", payload: res.data.response })
         }
     },
-    
 }
 
 export default itinerariesActions;

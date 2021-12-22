@@ -1,18 +1,28 @@
 import itinerariesActions from "../redux/actions/itinerariesActions"
-import { useRef } from "react"
+import {useRef, useState} from "react"
 import {connect} from "react-redux"
 
 function Comments(props) {
     const editComment = useRef()
+    const [edit, setEdit] = useState(false)
 
-    function handleEditComment(e){ 
+    function handleEditComment(e) {
         e.preventDefault()
-            props.editComments(
-                props.comment._id,
-                editComment.current.value
-            )
-            editComment.current.value = ""
+        setEdit(!edit)
+        props.editComments(
+            props.comment._id,
+            editComment.current.value
+        )
+        editComment.current.value = ""
     }
+
+    function handleDelete (e) {
+        e.preventDefault()
+        props.deleteComments(
+            props.comment._id
+        )
+    }
+    
     return(
         <div className="comentario">
             {props.comment.user && 
@@ -24,20 +34,30 @@ function Comments(props) {
                 )
             }
             {props.comment.user && props.comment.user._id === props.user._id &&
-                (<form onSubmit={handleEditComment}>
-                    <input
-                        ref={editComment}
-                        type="text"
-                        className="comentar"
-                        placeholder="escribime algo"
-                        />
-                    <input type="submit" value="Submit" />
-                </form>
+                (<div>
+                    <p onClick={() => {setEdit(!edit)}}>Edit </p>
+                    {edit && (
+                        <>
+                            <form onSubmit={handleEditComment}>
+                                <input
+                                    ref={editComment}
+                                    type="text"
+                                    className="comentar"
+                                    placeholder="edit your comment"
+                                    />
+                                <input type="submit" value="Submit" />
+                            </form>
+                                <p className="btn-pillo" onClick={handleDelete}>X</p>
+                        </>
+                    )}
+                </div>
                 )
             }
         </div>
     )
 }
+
+
 const mapDispatchToProps = {
     editComments: itinerariesActions.editComments,
     deleteComments: itinerariesActions.deleteComments,

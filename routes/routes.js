@@ -63,8 +63,9 @@ Router.route('/comments/:itineraryId')
 Router.route('/comments')
 .get(commentControllers.getAllComments)
 .put(passport.authenticate("jwt", {session: false}), commentControllers.editComment) 
-.delete(commentControllers.deleteComment) 
 
+Router.route('/comments/:commentId')
+.delete(passport.authenticate("jwt", {session: false}), commentControllers.deleteComment) 
 
 
 

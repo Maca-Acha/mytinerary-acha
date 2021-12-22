@@ -639,6 +639,9 @@ p{
   padding: 0.5rem;
 }
 /*COMENTARIOS*/
+.btn-pillo{
+  cursor: pointer;
+}
 .input-comentar{
   display: flex;
 }
