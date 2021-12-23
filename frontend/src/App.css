@@ -639,20 +639,35 @@ p{
   padding: 0.5rem;
 }
 /*COMENTARIOS*/
-.btn-pillo{
+.eliminar{
+  display: flex;
+  align-self: start;
+  padding: .5rem;
+  color: white !important;
+}
+.btn-edit{
+  display: flex;
+  align-self: center;
+  color:#FA736D !important;
+
+}
+.editor{
+  display: flex;
+}
+.btn-cursor{
   cursor: pointer;
 }
 .input-comentar{
   display: flex;
 }
 .btn-comentar{
-  margin: .8rem 1rem .8rem 0;
+  margin: .8rem 1.5rem .8rem 0;
   padding: 0 !important;
   height: 2.2rem;
 }
 .comentar{
   width: 80%;
-  margin: .8rem .5rem .8rem 1rem;
+  margin: .8rem .5rem .8rem 1.5rem;
   border-radius: .2rem;
   background: rgba(250, 115, 109, 0.17);
   border: 1px solid #FA736D;
@@ -665,12 +680,15 @@ p{
   height: 3.5rem;
 }
 .formu-comentarios{
-  background-color: #2d3962cc;
+  background-color: #2d3962b0;
   border-radius: .5rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
   padding: 1rem;
+  display: flex;
+  justify-content: center;
 }
+
 .comentario{
   display: flex;
   justify-content: start;

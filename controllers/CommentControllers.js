@@ -48,11 +48,10 @@ const commentControllers = {
     },
     deleteComment: async (req, res) => {
         try {
-            await Comment.findOneAndDelete({ _id: req.params.commentId , user:req.user._id });
-            console.log("te borre")
+            let comment = await Comment.findOneAndDelete({ _id: req.params.commentId});
             res.json({
                 success: true,
-                response: "Deleted comment with id" + req.body.id,
+                response: comment,
             });
         } catch (e) {
             res.json({ success: false, error: e });

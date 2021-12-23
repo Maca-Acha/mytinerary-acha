@@ -36,7 +36,7 @@ function Navigations(props) {
                                             src={
                                                 props.user.photo
                                                 ? props.user.photo
-                                                : ""
+                                                : "../assets/usericon.svg"
                                             }
                                             className="nav-img"
                                             alt="user_photo"

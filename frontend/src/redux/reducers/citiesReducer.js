@@ -7,7 +7,7 @@ const initialState = {
 }
 
 const citiesReducer = (state = initialState, action) => {
-    switch (action.type) {   ///como un if con varias condiciones
+    switch (action.type) {   
         case 'GET_ALL_CITIES':
             return {
                 ...state,

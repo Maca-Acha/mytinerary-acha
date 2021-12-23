@@ -11,7 +11,6 @@ module.exports = passport.use(
             secretOrKey: process.env.SECRET_KEY,
         },
         (jwt_payload, done) => {
-            console.log(done)
             User.findOne({_id: jwt_payload._doc._id})
                 .then((user) => {
                 if (user) {
@@ -21,7 +20,6 @@ module.exports = passport.use(
                 }
                 })
                 .catch((err) => {
-                console.log(err)
                 return done(err, false)
                 })
         }

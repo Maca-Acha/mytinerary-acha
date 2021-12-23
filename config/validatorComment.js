@@ -8,7 +8,6 @@ const validatorComment = (req, res, next) => {
     })
     const validation = schema.validate(req.body, {abortEarly:false})
     if(validation.error) {
-        console.log(validation.error.details)
         return res.json({success: false, response:validation.error.details })
     }
     next()

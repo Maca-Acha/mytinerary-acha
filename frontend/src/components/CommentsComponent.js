@@ -1,8 +1,13 @@
 import itinerariesActions from "../redux/actions/itinerariesActions"
 import {useRef, useState} from "react"
 import {connect} from "react-redux"
+import swal from "sweetalert"
+import {FaRegTrashAlt} from "react-icons/fa";
+import {FiEdit} from "react-icons/fi";
 
 function Comments(props) {
+    const editar = <FiEdit />
+    const basura = <FaRegTrashAlt />
     const editComment = useRef()
     const [edit, setEdit] = useState(false)
 
@@ -16,17 +21,31 @@ function Comments(props) {
         editComment.current.value = ""
     }
 
-    function handleDelete (e) {
-        e.preventDefault()
-        props.deleteComments(
-            props.comment._id
-        )
-    }
+    function deleteComment() {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            }).then((willDelete) => {
+            if (willDelete) {
+                props.deleteComments(
+                    props.comment._id
+                )
+                swal("Poof! Your imaginary file has been deleted!", {
+                icon: "success",
+                })
+            } else {
+                swal("Your imaginary file is safe!")
+            }
+            })
+        }
+
     
     return(
         <div className="comentario">
-            {props.comment.user && 
-                (
+            {props.comment.user && (
                 <div className="comentario-cont">
                     <img className="foto-comentario" src={props.comment.user.photo} />
                     <p className="msj-comentario">{props.comment.message}</p>    
@@ -34,11 +53,11 @@ function Comments(props) {
                 )
             }
             {props.comment.user && props.comment.user._id === props.user._id &&
-                (<div>
-                    <p onClick={() => {setEdit(!edit)}}>Edit </p>
+                (<div className="editor">
+                    <p className="btn-cursor btn-edit"  onClick={() => {setEdit(!edit)}}>{editar} </p>
                     {edit && (
-                        <>
-                            <form onSubmit={handleEditComment}>
+                        <div className="editor">
+                            <form className="editor" onSubmit={handleEditComment}>
                                 <input
                                     ref={editComment}
                                     type="text"
@@ -47,11 +66,13 @@ function Comments(props) {
                                     />
                                 <input type="submit" value="Submit" />
                             </form>
-                                <p className="btn-pillo" onClick={handleDelete}>X</p>
-                        </>
+                        </div>
                     )}
                 </div>
                 )
+            }
+            {props.comment.user && props.comment.user._id === props.user._id &&
+                (<p className="btn-cursor eliminar" onClick={() => {deleteComment()} }>{basura}</p>)
             }
         </div>
     )

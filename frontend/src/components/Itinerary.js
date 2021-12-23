@@ -4,16 +4,17 @@ import { AiOutlineDollarCircle } from "react-icons/ai"
 import {connect} from 'react-redux'
 import activitiesActions from "../redux/actions/activitiesActions"
 import itinerariesActions from "../redux/actions/itinerariesActions"
-import {Carousel} from "react-bootstrap"
 import { toast } from "react-toastify"
 import Comments from "./CommentsComponent"
 import {useRef} from "react"
+
 
 function Itinerary(props) {
     const plata = <AiOutlineDollarCircle />
     const [display, setDisplay] = useState(false)
     const [liked, setliked] = useState("")
     const [likes, setlikes] = useState("")
+
 
     if (!localStorage.getItem("token") && liked === "") {
         setliked(false)
@@ -49,7 +50,7 @@ function Itinerary(props) {
             comment.current.value
         )
         comment.current.value = ""
-            
+
     }
 
     function handleLike() {
@@ -67,7 +68,6 @@ function Itinerary(props) {
     function precio(price) {
         return Array.from({length: price})
     }
-    console.log(props.comments)
 
     return (
         <div key= {props.itinerary._id} className="itinerarios">
@@ -114,7 +114,6 @@ function Itinerary(props) {
                                                 style={{ backgroundImage: `url("${activity.image}")` }}
                                             >
                                                 <h3 className="activit-titulo">{activity.title}</h3>
-                                                {/* <p>{activity.description}</p> */}
                                             </div>
                                         </div>
                                     )
@@ -127,7 +126,8 @@ function Itinerary(props) {
                     </div>
                     {display && (
                         <div className="formu-comentarios">
-                            {props.comments && /* (props.comments[0].itinerary === props.itinerary._id ) ?  */ props.comments.map(comment => {
+                            <h3 className="titulo-comentarios">Comments</h3>
+                            {props.comments && props.comments.map(comment => {
                                 if(comment.itinerary === props.itinerary._id){
                                     return(
                                         <div >
@@ -135,7 +135,7 @@ function Itinerary(props) {
                                         </div>
                                     )
                                 }
-                            })/* : <p className="msj-comentario">No Comments</p>  */
+                            })
                             }
                         </div>
                     )
@@ -172,7 +172,6 @@ const mapDispatchToProps = {
 const mapStateToProps = (state) => {
     return {
         comments: state.itinerariesReducer.comments,
-        token: state.itinerariesReducer.token
     }
 }
 

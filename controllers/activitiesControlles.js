@@ -19,7 +19,6 @@ const activityControllers = {
     returnActivitiesByItinerary: (req, res) => {
         Activity.find({itinerary: {_id: req.params.itineraryId}})
             .then((response) => {
-                console.log(response)
                 res.json({response})
             })
             .catch((err) => console.log(err))

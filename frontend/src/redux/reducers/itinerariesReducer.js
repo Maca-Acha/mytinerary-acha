@@ -16,11 +16,6 @@ const itinerariesReducer = (state = initialState, action) => {
                 ...state,
                 itineraries: action.payload
             } 
-        case 'GET_COMMENTS':
-            return{
-                ...state,
-                comments: action.payload
-            } 
         case 'GET_ALL_COMMENTS':
             return{
                 ...state,
