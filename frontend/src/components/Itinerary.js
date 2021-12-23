@@ -14,17 +14,13 @@ function Itinerary(props) {
     const hora = <AiOutlineClockCircle />
     const plata = <AiOutlineDollarCircle />
     const [display, setDisplay] = useState(false)
-    const [liked, setliked] = useState("")
+    const [liked, setliked] = useState("") //para que se le cargue la info al prinpio y no se vuelva a cargar
     const [likes, setlikes] = useState("")
 
     if (!localStorage.getItem("token") && liked === "") {
         setliked(false)
-    }
+    } //liked cambia si esta likeado o no. si no hay
 
-    useEffect(() => {
-    !props.user && setliked(false)
-    }, [props.user])
-    
     if (props.itinerary && liked === "" && likes === "") {
         if(props.user){
         setliked(props.itinerary.likes.some((id) => id === props.user._id))
