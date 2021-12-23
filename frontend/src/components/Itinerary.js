@@ -1,20 +1,21 @@
+import {connect} from 'react-redux'
+import {useRef} from "react"
 import {Card} from "react-bootstrap"
 import {useEffect, useState} from "react"
 import { AiOutlineDollarCircle } from "react-icons/ai"
-import {connect} from 'react-redux'
+import {AiOutlineClockCircle} from "react-icons/ai";
 import activitiesActions from "../redux/actions/activitiesActions"
 import itinerariesActions from "../redux/actions/itinerariesActions"
-import { toast } from "react-toastify"
 import Comments from "./CommentsComponent"
-import {useRef} from "react"
+import { toast } from "react-toastify"
 
 
 function Itinerary(props) {
+    const hora = <AiOutlineClockCircle />
     const plata = <AiOutlineDollarCircle />
     const [display, setDisplay] = useState(false)
     const [liked, setliked] = useState("")
     const [likes, setlikes] = useState("")
-
 
     if (!localStorage.getItem("token") && liked === "") {
         setliked(false)
@@ -50,7 +51,6 @@ function Itinerary(props) {
             comment.current.value
         )
         comment.current.value = ""
-
     }
 
     function handleLike() {
@@ -81,7 +81,9 @@ function Itinerary(props) {
                         </div>
                         <div className="texto-itinerario">
                             <div className="duracion-costo">
-                                <p className="duracion">Duration: {props.itinerary.duration}Hs</p>
+                                <div className='horas'>
+                                    <p className='hora'>{hora}</p><p className="duracion">{props.itinerary.duration}Hs</p>
+                                </div>
                                 <div className="precio">
                                     <p className="color-texto">Price:</p> {precio(props.itinerary.price).map((index) => (
                                         <span key={index + 1} className="plata">{plata}</span>
@@ -126,11 +128,13 @@ function Itinerary(props) {
                     </div>
                     {display && (
                         <div className="formu-comentarios">
-                            <h3 className="titulo-comentarios">Comments</h3>
+                            <div className="titulo-comentarios">
+                                <h3 className='comentario-titulo' >Comments</h3>
+                            </div>
                             {props.comments && props.comments.map(comment => {
                                 if(comment.itinerary === props.itinerary._id){
                                     return(
-                                        <div >
+                                        <div className='fondo-comentario'>
                                             <Comments comment={comment} itinerary={props.itinerary._id} user={props.user} />
                                         </div>
                                     )
@@ -145,7 +149,7 @@ function Itinerary(props) {
                             <input
                                 ref={comment}
                                 type="text"
-                                className="comentar"
+                                className="comentar-input"
                                 placeholder= "Leave your comment here"
                                 />
                             <input className='btn-submit btn-comentar' type="submit" value="Submit" />
