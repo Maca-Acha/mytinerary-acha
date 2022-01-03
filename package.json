@@ -4,7 +4,6 @@
   "description": "Proyecto Mern",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "heroku-postbuild": "cd frontend && npm install && npm run build"
   },
@@ -25,20 +24,14 @@
   },
   "homepage": "https://github.com/Maca-Acha/mytinerary-acha#readme",
   "dependencies": {
-    "axios": "^0.24.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "joi": "^17.5.0",
     "mongoose": "^6.0.13",
-    "npm": "^8.3.0",
     "passport": "^0.5.0",
     "passport-jwt": "^4.0.0",
-    "react-google-login": "^5.2.2"
-  },
-  "devDependencies": {
-    "-": "^0.0.1",
-    "nodemon": "^2.0.15"
+    "jsonwebtoken": "^8.5.1"
   }
 }
