@@ -1,3 +1,4 @@
+const { required } = require('joi')
 const joi = require('joi')
 
 const validator = (req, res, next) => {
@@ -12,7 +13,7 @@ const validator = (req, res, next) => {
             'string.empty' : "this field is required",
             'string.min' : "This field must be at least 8 characters long"
         }),
-        photo: joi.string(),
+        photo: joi.string().required(false),
         country: joi.string(),
         google: joi.boolean()
     })

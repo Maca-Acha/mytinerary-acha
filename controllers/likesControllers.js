@@ -13,8 +13,7 @@ const likesControllers = {
         .then((response) => {
             res.json({response})
         })
-        .catch((err) => console.log(err))
-        
+        .catch((err) => console.log(err))      
     }
 }
 

@@ -37,7 +37,7 @@ function CardCity (props){
             {props.city ? (
                     props.itineraries.length > 0 
                     ? (props.itineraries.map((itinerary, index)=>
-                    <Itinerary key={index} itinerary={itinerary} cityId={params.id} user={props.user} activities={props.activities} />)) : 
+                    <Itinerary key={index} itinerary={itinerary} params={params.id} user={props.user} activities={props.activities} />)) : 
                     (
                     <h2 className="mensaje-construccion">There are not itineraries for this city yet...</h2>
                     )): <Spinner className="spinner" animation="border" variant="danger" />

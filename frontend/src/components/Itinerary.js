@@ -27,7 +27,6 @@ function Itinerary(props) {
         }
         setlikes(props.itinerary.likes.length)
     }
-    
     useEffect(() => {
         !props.activities[0] && props.getActivities(props.itinerary._id)
     }, [props.activities])
@@ -50,9 +49,10 @@ function Itinerary(props) {
     }
 
     function handleLike() {
-        if (localStorage.getItem("token")) {
+        if (localStorage.getItem("token") && props.user.email) {
             setliked(!liked)
             liked ? setlikes(likes - 1) : setlikes(likes + 1)
+            console.log(props.params)
             props.likes(props.user._id, props.itinerary._id, props.params)
         } else {
             toast.warning("Please sign in to like this itinerary", {

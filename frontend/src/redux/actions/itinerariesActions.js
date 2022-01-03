@@ -14,7 +14,7 @@ const itinerariesActions = {
     likes: (userId, itineraryId, city_id) => {
         return async (dispatch, getState) => {
             if(userId && itineraryId){
-                await axios.put("http://localhost:4000/api/like/", {userId, itineraryId} )
+                await axios.put("http://localhost:4000/api/like/", { itineraryId, userId} )
                 let response = await axios.get("http://localhost:4000/api/itinerary/" + city_id)
                 dispatch({type: "GET_LIKES", payload: response.data.response})
             }else{

@@ -3,7 +3,7 @@ const Itinerary = require('../models/Itinerary')
 const itineraryControllers = {
     returnItineraries:(req,res)=>{
         Itinerary.find()
-        .populate('city')
+        /* .populate('city') */
         .then((response)=> res.json({response}))
     }, 
     returnItinerary:(req,res)=>{
@@ -12,7 +12,9 @@ const itineraryControllers = {
     })  
     },
     returnItinerariesByCity: (req, res) => {
+        console.log(req.params)
         Itinerary.find({city: {_id: req.params.city}})
+            .populate("city")
             .then((response) => {
                 res.json({response})
             })

@@ -54,7 +54,8 @@ Router.route('/activities/:id')
 Router.route("/activity/:itineraryId")
 .get(activitiesControllers.returnActivitiesByItinerary) 
 
-Router.route('/like').put(likesControllers.likes)
+Router.route('/like')
+.put(likesControllers.likes)
 
 Router.route('/comments/:itineraryId')
 .get(commentControllers.getComments)

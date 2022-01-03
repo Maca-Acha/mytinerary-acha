@@ -6,7 +6,7 @@ const authActions = {
         return async(dispatch, getState)=>{
             try{
                 const user = await axios.post("http://localhost:4000/api/auth/signUp",{...newUser})
-                if(user.data.success ){
+                if(user.data.success){
                     localStorage.setItem('token', user.data.response.token)
                     toast.success("Welcome " + user.data.response.newUser.name, {
                         position: toast.POSITION.TOP_CENTER
