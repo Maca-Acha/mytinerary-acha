@@ -5,7 +5,7 @@ const authActions = {
     postUser: (newUser)=>{
         return async(dispatch, getState)=>{
             try{
-                const user = await axios.post("http://localhost:4000/api/auth/signUp",{...newUser})
+                const user = await axios.post("https://mytinerary-acha.herokuapp.com/api/auth/signUp",{...newUser})
                 if(user.data.success){
                     localStorage.setItem('token', user.data.response.token)
                     toast.success("Welcome " + user.data.response.newUser.name, {
@@ -25,7 +25,7 @@ const authActions = {
     signIn: (email,password,google)=>{
         return async(dispatch, getState)=>{
             try{
-                const user = await axios.post("http://localhost:4000/api/auth/signIn",{email,password,google})
+                const user = await axios.post("https://mytinerary-acha.herokuapp.com/api/auth/signIn",{email,password,google})
                 if(user.data.success && !user.data.error){
                     localStorage.setItem('token', user.data.response.token)
                     toast.success("Welcome " + user.data.response.emailExist.name, {
@@ -46,7 +46,7 @@ const authActions = {
         return async (dispatch, getState) => {
             try {
             const token = localStorage.getItem("token")
-            const response = await axios.get("http://localhost:4000/api/auth",{
+            const response = await axios.get("https://mytinerary-acha.herokuapp.com/api/auth",{
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

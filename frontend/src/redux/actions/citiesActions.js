@@ -3,7 +3,7 @@ import axios from 'axios';
 const citiesActions = {
     getCities: () => {
         return async (dispatch, getState) => {
-            const response = await axios.get('http://localhost:4000/api/cities');
+            const response = await axios.get('https://mytinerary-acha.herokuapp.com/api/cities');
             
             dispatch({type: "GET_ALL_CITIES", payload: {response:response.data.response, loading:false}});
         }
@@ -15,7 +15,7 @@ const citiesActions = {
     },
     getCity: (id) => {
         return async (dispatch, getState) =>{
-            const response = await axios.get('http://localhost:4000/api/city/' + id);
+            const response = await axios.get('https://mytinerary-acha.herokuapp.com/api/city/' + id);
             dispatch({type:"GET_A_CITY_ID", payload:response.data.response })
         }
     }, 

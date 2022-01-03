@@ -15,13 +15,13 @@ app.use(passport.initialize())
 app.use("/api", Router)
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("frontend/build"))
-  app.get("*", (req, res) => {
+    app.use(express.static("frontend/build"))
+    app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname + "/frontend/build/index.html"))
-  })
+    })
 }
 
 app.listen(PORT, () =>
-  console.log("App listening on port " + PORT
+    console.log("App listening on port " + PORT
 )
 )
