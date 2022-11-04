@@ -151,7 +151,6 @@ a:hover{
   align-items: center !important;
   transition: 0.5s;
   max-width: 322px;
-  width: 100vw;
   justify-content: space-around;
 }
 .btn-home:hover{
